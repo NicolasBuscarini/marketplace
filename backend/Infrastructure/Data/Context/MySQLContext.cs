@@ -11,6 +11,8 @@ namespace MarketPlace.Infrastructure.Data.Context
         public MySQLContext(DbContextOptions<MySQLContext> options) : base(options)
         {
         }
+        public DbSet<Produto> Produto { get; set; }
+        public DbSet<Loja> Loja { get; set; }
         public DbSet<ApplicationUser> User { get; set; }
         public DbSet<ApplicationRole> Role { get; set; }
 
