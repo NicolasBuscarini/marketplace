@@ -9,7 +9,7 @@
     }
   },
   "profiles": {
-    "IntegracaoPix": {
+    "MarketPlace": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,
