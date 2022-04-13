@@ -4,10 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using MarketPlace.Domain.Models;
-using MarketPlace.Impl.Repository;
 using MarketPlace.Infrastructure.Data.Context;
 
-namespace ContaCentral.Infrastructure.Data.Repositories
+namespace MarketPlace.Impl.Repository
 {
     public class UserRepository : GenericRepository<ApplicationUser, Guid>
     {

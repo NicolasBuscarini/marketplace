@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
-using ContaCentral.Infrastructure.Data.Repositories;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
@@ -10,13 +9,14 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
-using ContaCentral.Infrastructure.Helper;
 using System.Text.RegularExpressions;
 using MarketPlace.Interfaces.IService;
 using MarketPlace.Domain.Models;
 using MarketPlace.Domain.Models.DTOs;
+using MarketPlace.Impl.Repository;
+using MarketPlace.Infrastructure.Helper;
 
-namespace ContaCentral.Domain.Services.Implementations
+namespace MarketPlace.Impl.Service
 {
     public class AuthService : IAuthService
     {
@@ -27,7 +27,7 @@ namespace ContaCentral.Domain.Services.Implementations
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
 
-        public AuthService( UserRepository userRepository, IConfiguration configuration, SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager, IHttpContextAccessor httpContextAccessor)
+        public AuthService(UserRepository userRepository, IConfiguration configuration, SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager, IHttpContextAccessor httpContextAccessor)
         {
             _userRepository = userRepository;
 
@@ -116,7 +116,7 @@ namespace ContaCentral.Domain.Services.Implementations
             };
 
             var result = await _userManager.CreateAsync(user, signUpDTO.Password);
-            
+
             if (!result.Succeeded)
                 if (result.Errors.ToList().Count > 0)
                     throw new ArgumentException(result.Errors.ToList()[0].Description);
