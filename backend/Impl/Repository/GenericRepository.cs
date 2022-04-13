@@ -40,7 +40,7 @@ namespace MarketPlace.Impl.Repository
 
         public virtual async Task<int> InsertOrUpdateAsync(T entity)
         {
-            var entry = _context.Update(entity);
+            _context.Update(entity);
             return await _context.SaveChangesAsync();
 
         }

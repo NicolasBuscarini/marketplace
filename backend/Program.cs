@@ -1,6 +1,6 @@
-using ContaCentral.Domain.Services.Implementations;
-using ContaCentral.Infrastructure.Data.Repositories;
 using MarketPlace.Domain.Models;
+using MarketPlace.Impl.Repository;
+using MarketPlace.Impl.Service;
 using MarketPlace.Infrastructure.Data.Context;
 using MarketPlace.Interfaces.IService;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -71,6 +71,9 @@ builder.Services.AddControllers();
 
 builder.Services.AddScoped<UserRepository>();
 builder.Services.AddScoped<IAuthService, AuthService>();
+
+builder.Services.AddScoped<IProdutoService, ProdutoService>();
+
 
 builder.Services.AddSwaggerGen(c =>
 {
