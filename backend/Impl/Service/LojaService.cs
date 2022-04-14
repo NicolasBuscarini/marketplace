@@ -5,49 +5,46 @@ using MarketPlace.Interfaces.IService;
 
 namespace MarketPlace.Impl.Service
 {
-    public class ProdutoService : IProdutoService
+    public class LojaService : ILojaService
     {
         private readonly IUserRepository _userRepository;
-        private readonly IProdutoRepository _produtoRepository;
+        private readonly ILojaRepository _produtoRepository;
 
-        public ProdutoService(
+        public LojaService(
             IUserRepository userRepository,
-            IProdutoRepository produtoRepository
+            ILojaRepository produtoRepository
         )
         {
             _userRepository = userRepository;
             _produtoRepository = produtoRepository;
         }
 
-        public async Task<Produto> CreateProduto(ProdutoDto produtoDto)
-        {
-            //throw new NotImplementedException();
-            Produto produto = new(produtoDto);
-
-            return await _produtoRepository.CreateAsync(produto);
-        }
-
-        public Task<bool> DeleteProduto(int id)
+        public Task<Loja> CreateLoja(LojaDto lojaDto)
         {
             throw new NotImplementedException();
         }
 
-        public Task<bool> DesativarProduto(int id)
+        public Task<bool> DeleteLoja(int id)
         {
             throw new NotImplementedException();
         }
 
-        public Task<List<Produto>> GetAllProdutos()
+        public Task<bool> DesativarLoja(int id)
         {
             throw new NotImplementedException();
         }
 
-        public Task<Produto> GetProdutoById(int id)
+        public Task<List<Loja>> GetAllLojas()
         {
             throw new NotImplementedException();
         }
 
-        public Task<bool> UpdateProduto(ProdutoDto produtoDto)
+        public Task<Loja> GetLojaById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> UpdateLoja(LojaDto lojaDto)
         {
             throw new NotImplementedException();
         }

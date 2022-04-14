@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-
-namespace MarketPlace.Domain.Models.DTOs
+﻿namespace MarketPlace.Domain.Models.DTOs
 {
     public class ProdutoDto
     {

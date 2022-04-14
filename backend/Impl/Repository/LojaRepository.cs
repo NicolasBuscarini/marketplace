@@ -5,17 +5,17 @@ using Microsoft.EntityFrameworkCore;
 
 namespace MarketPlace.Impl.Repository
 {
-    public class ProdutoRepository : GenericRepository<Produto, Guid>, IProdutoRepository
+    public class LojaRepository : GenericRepository<Loja, Guid>, ILojaRepository
     {
         private readonly MySQLContext _context;
-        public ProdutoRepository(MySQLContext context) : base(context)
+        public LojaRepository(MySQLContext context) : base(context)
         {
             _context = context;
         }
 
-        public async Task<List<Produto>> ListProdutos()
+        public async Task<List<Loja>> ListLojas()
         {
-            List<Produto> list = await _context.Produto.ToListAsync();
+            List<Loja> list = await _context.Loja.ToListAsync();
 
             return list;
         }
