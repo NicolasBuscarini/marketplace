@@ -1,7 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
-using MarketPlace.Domain.Models;
+﻿using MarketPlace.Domain.Models;
 using MarketPlace.Infrastructure.Data.Context;
 using MarketPlace.Interfaces.IRepository;
+using Microsoft.EntityFrameworkCore;
 
 namespace MarketPlace.Impl.Repository
 {
@@ -22,8 +22,8 @@ namespace MarketPlace.Impl.Repository
 
         public async Task<ApplicationUser> GetByCPFAsync(string cpf)
         {
-            ApplicationUser user = await _context.User.Where(p => p.CPF.Equals(cpf)).FirstOrDefaultAsync();
-
+            ApplicationUser applicationUser = await _context.User.Where(p => p.CPF.Equals(cpf, StringComparison.Ordinal)).FirstOrDefaultAsync();
+            ApplicationUser user = applicationUser;
             return user;
         }
 

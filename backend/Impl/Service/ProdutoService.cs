@@ -21,7 +21,6 @@ namespace MarketPlace.Impl.Service
 
         public async Task<Produto> CreateProduto(ProdutoDto produtoDto)
         {
-            //throw new NotImplementedException();
             Produto produto = new(produtoDto);
 
             return await _produtoRepository.CreateAsync(produto);

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace MarketPlace.Infrastructure.Config.Identity
+﻿namespace MarketPlace.Infrastructure.Config.Identity
 {
     public class CustomClaimTypes
     {

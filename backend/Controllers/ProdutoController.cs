@@ -47,21 +47,6 @@ namespace MarketPlace.Controllers
             }
         }
 
-        //[HttpPost("search-produto")]
-        //public async Task<ActionResult> SearchProduto([FromBody] SearchDTO searchDTO)
-        //{
-        //    try
-        //    {
-        //        List<Produto> produtos = await _produtoService.SearchProduto(searchDTO);
-
-        //        return Ok(produtos);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return BadRequest(ex.Message);
-        //    }
-        //}
-
         [HttpGet("get-produto")]
         public async Task<ActionResult> GetProdutoByProdutoId([FromQuery] int produtoId)
         {

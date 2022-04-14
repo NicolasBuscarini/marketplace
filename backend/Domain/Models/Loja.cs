@@ -10,7 +10,7 @@ namespace MarketPlace.Domain.Models
         public decimal Cnpj { get; private set; }
 
         [JsonIgnore]
-        public List<Produto> Produtos { get; set; }
+        public List<Produto>? Produtos { get; set; }
 
     }
 }

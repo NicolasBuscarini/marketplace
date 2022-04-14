@@ -1,20 +1,13 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.Configuration;
-using Microsoft.IdentityModel.Tokens;
-using System;
-using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
-using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
-using System.Text.RegularExpressions;
-using MarketPlace.Interfaces.IService;
-using MarketPlace.Domain.Models;
+﻿using MarketPlace.Domain.Models;
 using MarketPlace.Domain.Models.DTOs;
 using MarketPlace.Infrastructure.Helper;
 using MarketPlace.Interfaces.IRepository;
+using MarketPlace.Interfaces.IService;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
 
 namespace MarketPlace.Impl.Service
 {
@@ -91,7 +84,7 @@ namespace MarketPlace.Impl.Service
             signUpDTO.CPF = signUpDTO.CPF.Replace(" ", "");
             signUpDTO.CPF = signUpDTO.CPF.Replace("-", "");
 
-            if (UtilsHelper.IsCpf(signUpDTO.CPF) == false)
+            if (!UtilsHelper.IsCpf(signUpDTO.CPF))
                 throw new ArgumentException("CPF inválido! Digite um cpf válido");
 
 
@@ -165,7 +158,7 @@ namespace MarketPlace.Impl.Service
 
         public async Task<ApplicationUser> GetCurrentUser()
         {
-            var userId = _userManager.GetUserId(_httpContextAccessor.HttpContext.User); // Get user id:
+            // var userId = _userManager.GetUserId(_httpContextAccessor.HttpContext.User); // Get user id:
 
             ApplicationUser user = await _userManager.GetUserAsync(_httpContextAccessor.HttpContext.User);
 

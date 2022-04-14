@@ -1,7 +1,6 @@
 ﻿using MarketPlace.Domain.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using System;
 
 namespace MarketPlace.Infrastructure.Data.Context
 

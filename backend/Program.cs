@@ -1,9 +1,6 @@
 using MarketPlace.Domain.Models;
-using MarketPlace.Impl.Repository;
-using MarketPlace.Impl.Service;
 using MarketPlace.Infrastructure.Data.Context;
 using MarketPlace.Infrastructure.InjecaoDependencia;
-using MarketPlace.Interfaces.IService;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -89,7 +86,8 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.UseCors(p => {
+app.UseCors(p =>
+{
     p.AllowAnyMethod();
     p.AllowAnyHeader();
     p.AllowAnyOrigin();

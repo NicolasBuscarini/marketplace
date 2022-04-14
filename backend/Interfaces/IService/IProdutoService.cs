@@ -8,7 +8,7 @@ namespace MarketPlace.Interfaces.IService
         Task<Produto> CreateProduto(ProdutoDto produtoDto);
         Task<bool> UpdateProduto(ProdutoDto produtoDto);
         Task<bool> DeleteProduto(int id);
-        Task<bool> DesativarProduto(int id);        
+        Task<bool> DesativarProduto(int id);
         Task<Produto> GetProdutoById(int id);
         Task<List<Produto>> GetAllProdutos();
     }
