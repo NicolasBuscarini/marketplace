@@ -2,6 +2,7 @@ using MarketPlace.Domain.Models;
 using MarketPlace.Impl.Repository;
 using MarketPlace.Impl.Service;
 using MarketPlace.Infrastructure.Data.Context;
+using MarketPlace.Infrastructure.InjecaoDependencia;
 using MarketPlace.Interfaces.IService;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
@@ -68,12 +69,9 @@ builder.Services.AddIdentity<ApplicationUser, ApplicationRole>()
 
 builder.Services.AddControllers();
 
-
-builder.Services.AddScoped<UserRepository>();
-builder.Services.AddScoped<IAuthService, AuthService>();
-
-builder.Services.AddScoped<IProdutoService, ProdutoService>();
-
+// Injeção de dependencias
+ServicesIoc.Config(builder.Services);
+RepositoryIoc.Config(builder.Services);
 
 builder.Services.AddSwaggerGen(c =>
 {

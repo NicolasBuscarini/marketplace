@@ -5,10 +5,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using MarketPlace.Domain.Models;
 using MarketPlace.Infrastructure.Data.Context;
+using MarketPlace.Interfaces.IRepository;
 
 namespace MarketPlace.Impl.Repository
 {
-    public class UserRepository : GenericRepository<ApplicationUser, Guid>
+    public class UserRepository : GenericRepository<ApplicationUser, Guid>, IUserRepository
     {
 
         private readonly MySQLContext _context;

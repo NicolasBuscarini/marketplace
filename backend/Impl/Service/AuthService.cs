@@ -13,21 +13,21 @@ using System.Text.RegularExpressions;
 using MarketPlace.Interfaces.IService;
 using MarketPlace.Domain.Models;
 using MarketPlace.Domain.Models.DTOs;
-using MarketPlace.Impl.Repository;
 using MarketPlace.Infrastructure.Helper;
+using MarketPlace.Interfaces.IRepository;
 
 namespace MarketPlace.Impl.Service
 {
     public class AuthService : IAuthService
     {
-        private readonly UserRepository _userRepository;
+        private readonly IUserRepository _userRepository;
 
         private readonly IConfiguration _configuration;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
 
-        public AuthService(UserRepository userRepository, IConfiguration configuration, SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager, IHttpContextAccessor httpContextAccessor)
+        public AuthService(IUserRepository userRepository, IConfiguration configuration, SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager, IHttpContextAccessor httpContextAccessor)
         {
             _userRepository = userRepository;
 

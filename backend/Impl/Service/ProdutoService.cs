@@ -1,16 +1,16 @@
 ﻿using MarketPlace.Domain.Models;
 using MarketPlace.Domain.Models.DTOs;
-using MarketPlace.Impl.Repository;
+using MarketPlace.Interfaces.IRepository;
 using MarketPlace.Interfaces.IService;
 
 namespace MarketPlace.Impl.Service
 {
     public class ProdutoService : IProdutoService
     {
-        private readonly UserRepository _userRepository;
+        private readonly IUserRepository _userRepository;
 
         public ProdutoService(
-            UserRepository userRepository
+            IUserRepository userRepository
         )
         {
             _userRepository = userRepository;
