@@ -2,7 +2,6 @@
 using MarketPlace.Interfaces.IRepository;
 using Microsoft.EntityFrameworkCore;
 
-
 namespace MarketPlace.Impl.Repository
 {
     public class GenericRepository<T, T_KEY> : IGenericRepository<T, T_KEY> where T : class where T_KEY : struct
