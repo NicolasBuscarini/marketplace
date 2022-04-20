@@ -7,21 +7,25 @@ namespace MarketPlace.Impl.Service
 {
     public class LojaService : ILojaService
     {
-        private readonly IUserRepository _userRepository;
-        private readonly ILojaRepository _produtoRepository;
+        private readonly ILojaRepository _lojaRepository;
+        private readonly IAuthService _authService;
 
         public LojaService(
-            IUserRepository userRepository,
-            ILojaRepository produtoRepository
+            IAuthService authService,
+            ILojaRepository lojaRepository
         )
         {
-            _userRepository = userRepository;
-            _produtoRepository = produtoRepository;
+            _authService = authService;
+            _lojaRepository = lojaRepository;
         }
 
-        public Task<Loja> CreateLoja(LojaDto lojaDto)
+        public async Task<Loja> CreateLoja(LojaDto lojaDto)
         {
-            throw new NotImplementedException();
+            ApplicationUser currentUser = await _authService.GetCurrentUser();
+
+            Loja loja = new(lojaDto, currentUser.Id);
+
+            return await _lojaRepository.CreateAsync(loja);
         }
 
         public Task<bool> DeleteLoja(int id)

@@ -1,4 +1,5 @@
 ﻿using MarketPlace.Domain.Models.DTOs;
+using MarketPlace.Domain.Models.Enums;
 using Microsoft.AspNetCore.Identity;
 
 namespace MarketPlace.Domain.Models
@@ -11,6 +12,7 @@ namespace MarketPlace.Domain.Models
         public string Endereco { get; set; }
         public string Endereco2 { get; set; }
         public int Cep { get; set; }
+        public EnumTypeUser TypeUserEnum { get; set; }
 
         public UserDto UserDTO()
         {
