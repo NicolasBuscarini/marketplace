@@ -1,6 +1,6 @@
 ﻿namespace MarketPlace.Domain.Models.Enums
 {
-    public enum EnumTypeUser
+    public enum EnumUserType
     {
         Cliente,
         Vendedor

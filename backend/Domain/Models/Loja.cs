@@ -9,7 +9,6 @@ namespace MarketPlace.Domain.Models
         public int Id { get; set; }
         public string Nome { get; private set; }
         public string Descricao { get; private set; }
-        public decimal Cnpj { get; private set; }
         public Guid UserId { get; set; }
         [ForeignKey("UserId")]
         public ApplicationUser User { get; set; }
@@ -25,7 +24,6 @@ namespace MarketPlace.Domain.Models
         {
             Nome = nome;
             Descricao = descricao;
-            Cnpj = cnpj;
             Produtos = produtos;
         }
 
@@ -33,7 +31,6 @@ namespace MarketPlace.Domain.Models
         {
             Nome = lojaDto.Nome;
             Descricao = lojaDto.Descricao;
-            Cnpj = lojaDto.Cnpj;
             UserId = userId;
         }
     }

@@ -80,21 +80,5 @@ namespace MarketPlace.Controllers
             }
         }
 
-        [HttpGet("get-userdto")]
-        public async Task<ActionResult> GetUserDTO([FromQuery] Guid id)
-        {
-            try
-            {
-                ApplicationUser user = await _authService.GetUserById(id);
-                UserDto userDTO = user.UserDTO();
-
-                return Ok(userDTO);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
-
     }
 }

@@ -1,5 +1,6 @@
 ﻿using MarketPlace.Domain.Models;
 using MarketPlace.Domain.Models.DTOs;
+using MarketPlace.Domain.Models.Enums;
 using MarketPlace.Infrastructure.Helper;
 using MarketPlace.Interfaces.IRepository;
 using MarketPlace.Interfaces.IService;
@@ -80,17 +81,26 @@ namespace MarketPlace.Impl.Service
             if (userExists != null)
                 throw new ArgumentException("Email already exists!");
 
-            signUpDTO.CPF = signUpDTO.CPF.Replace(".", "");
-            signUpDTO.CPF = signUpDTO.CPF.Replace(" ", "");
-            signUpDTO.CPF = signUpDTO.CPF.Replace("-", "");
+            signUpDTO.CpfCnpj = signUpDTO.CpfCnpj.Replace(".", "");
+            signUpDTO.CpfCnpj = signUpDTO.CpfCnpj.Replace(" ", "");
+            signUpDTO.CpfCnpj = signUpDTO.CpfCnpj.Replace("-", "");
 
-            if (!UtilsHelper.IsCpf(signUpDTO.CPF))
-                throw new ArgumentException("CPF inválido! Digite um cpf válido");
+            EnumUserType enumUserType;
+            if (UtilsHelper.IsCpf(signUpDTO.CpfCnpj))
+            {
+                enumUserType = EnumUserType.Cliente;
+            } else if (!UtilsHelper.IsCnpj(signUpDTO.CpfCnpj))
+            {
+                enumUserType = EnumUserType.Vendedor;
+            }
+            else
+            {
+                throw new ArgumentException("CPF/CNPJ inválido! Digite um válido");
+            }
 
-
-            userExists = await _userRepository.GetByCPFAsync(signUpDTO.CPF);
+            userExists = await _userRepository.GetByCpfCnpjAsync(signUpDTO.CpfCnpj);
             if (userExists != null)
-                throw new ArgumentException("CPF already exists!");
+                throw new ArgumentException("CPF/CNPJ already exists!");
 
             ApplicationUser user;
 
@@ -99,13 +109,14 @@ namespace MarketPlace.Impl.Service
                 Email = signUpDTO.Email,
                 SecurityStamp = Guid.NewGuid().ToString(),
                 UserName = signUpDTO.Username,
-                CPF = signUpDTO.CPF,
+                CpfCnpj = signUpDTO.CpfCnpj,
                 Cep = signUpDTO.Cep,
                 Endereco = signUpDTO.Endereco,
                 Endereco2 = signUpDTO.Endereco2,
                 DataNascimento = signUpDTO.DataNascimento,
                 NomeCompleto = signUpDTO.NomeCompleto,
-                PhoneNumber = signUpDTO.PhoneNumber
+                PhoneNumber = signUpDTO.PhoneNumber,
+                EnumUserType = enumUserType
             };
 
             var result = await _userManager.CreateAsync(user, signUpDTO.Password);
