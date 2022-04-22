@@ -23,14 +23,14 @@ jobs:
     
     - name: Restore
       run: dotnet restore
-      working-directory: ./DemoApp
+      working-directory: ./backend
     
     - name: Build with dotnet
       run: dotnet build --configuration Release
-      working-directory: ./DemoApp
+      working-directory: ./backend
 
 
     - name: Dotnet Publish
       run: dotnet publish --configuration Release -o netcore 
-      working-directory: ./DemoApp
+      working-directory: ./backend
       
