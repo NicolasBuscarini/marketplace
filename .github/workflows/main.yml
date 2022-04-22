@@ -1,0 +1,36 @@
+name: ASP.NET Core CI
+
+on: 
+  pull_request:
+    branches: 
+      - main
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        dotnet_version: ['6.0']
+        os: [ubuntu-latest, windows-latest, macOS-latest]
+
+        
+    steps:
+    - uses: actions/checkout@v1
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: ${{ matrix.dotnet_version }}
+    
+    - name: Restore
+      run: dotnet restore
+      working-directory: ./DemoApp
+    
+    - name: Build with dotnet
+      run: dotnet build --configuration Release
+      working-directory: ./DemoApp
+
+
+    - name: Dotnet Publish
+      run: dotnet publish --configuration Release -o netcore 
+      working-directory: ./DemoApp
+      
