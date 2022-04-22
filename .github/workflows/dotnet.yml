@@ -1,25 +1,32 @@
-name: .NET
-
+name: DemoNewCD
 on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+  workflow_dispatch:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
-    - uses: actions/checkout@v3
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v2
-      with:
-        dotnet-version: 6.0.x
-    - name: Restore dependencies
-      run: dotnet restore
-    - name: Build
-      run: dotnet build --no-restore
-    - name: Test
-      run: dotnet test --no-build --verbosity normal
+      - name: Run a one-line script
+        run: echo Hello, world!
+
+
+  deploy-dev:
+    runs-on: ubuntu-latest
+    environment: 
+      name: dev
+      url: 'nicolasbuscarini.com'
+    needs: build
+    steps:
+      - name: Run a one-line script
+        run: echo Deploy Dev
+
+
+  deploy-prd:
+    runs-on: ubuntu-latest
+    environment: 
+      name: prd
+      url: 'nicolasbuscarini.com'
+    needs: deploy-dev
+    steps:
+      - name: Run a one-line script
+        run: echo Deploy PRD
