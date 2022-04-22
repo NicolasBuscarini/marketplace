@@ -3,6 +3,7 @@
     public enum EnumUserType
     {
         Cliente,
-        Vendedor
+        Vendedor,
+        Admin
     }
 }

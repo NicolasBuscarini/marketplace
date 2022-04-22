@@ -6,15 +6,16 @@ namespace MarketPlace.Domain.Models
 {
     public class Loja
     {
-        public int Id { get; set; }
-        public string Nome { get; private set; }
-        public string Descricao { get; private set; }
-        public Guid UserId { get; set; }
+        public int Id { get; private set; }
+        public string Nome { get;  set; }
+        public string Descricao { get;  set; }
+        public decimal Cnpj { get; }
+        public Guid UserId { get; private set; }
         [ForeignKey("UserId")]
-        public ApplicationUser User { get; set; }
+        public ApplicationUser User { get; private set; }
 
         [JsonIgnore]
-        public List<Produto>? Produtos { get; set; }
+        public List<Produto>? Produtos { get; private set; }
 
         public Loja()
         {
@@ -24,6 +25,7 @@ namespace MarketPlace.Domain.Models
         {
             Nome = nome;
             Descricao = descricao;
+            Cnpj = cnpj;
             Produtos = produtos;
         }
 

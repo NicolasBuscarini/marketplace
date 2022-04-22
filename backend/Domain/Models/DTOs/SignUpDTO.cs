@@ -2,8 +2,23 @@
 
 namespace MarketPlace.Domain.Models.DTOs
 {
-    public class SignUpDTO
+    public class SignUpDto
     {
+        public SignUpDto(string username, string nomeCompleto, DateTime dataNascimento, string endereco, string endereco2, int cep, string email, string password, string passwordConfirm, string cpfCnpj, string phoneNumber)
+        {
+            Username = username ?? throw new ArgumentNullException(nameof(username));
+            NomeCompleto = nomeCompleto ?? throw new ArgumentNullException(nameof(nomeCompleto));
+            DataNascimento = dataNascimento;
+            Endereco = endereco ?? throw new ArgumentNullException(nameof(endereco));
+            Endereco2 = endereco2 ?? throw new ArgumentNullException(nameof(endereco2));
+            Cep = cep;
+            Email = email ?? throw new ArgumentNullException(nameof(email));
+            Password = password ?? throw new ArgumentNullException(nameof(password));
+            PasswordConfirm = passwordConfirm ?? throw new ArgumentNullException(nameof(passwordConfirm));
+            CpfCnpj = cpfCnpj ?? throw new ArgumentNullException(nameof(cpfCnpj));
+            PhoneNumber = phoneNumber ?? throw new ArgumentNullException(nameof(phoneNumber));
+        }
+
         [Required(ErrorMessage = "User Name is required")]
         public string Username { get; set; }
 

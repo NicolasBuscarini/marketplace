@@ -46,7 +46,7 @@ namespace MarketPlace.Impl.Service
             throw new NotImplementedException();
         }
 
-        public Task<bool> UpdateProduto(ProdutoDto produtoDto)
+        public Task<int> UpdateProduto(ProdutoDto produtoDto)
         {
             throw new NotImplementedException();
         }

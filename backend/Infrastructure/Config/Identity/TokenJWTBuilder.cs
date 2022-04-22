@@ -4,52 +4,52 @@ using System.Security.Claims;
 
 namespace MarketPlace.Infrastructure.Config.Identity
 {
-    public class TokenJWTBuilder
+    public class TokenJwtBuilder
     {
-        private SecurityKey securityKey = null;
+        private SecurityKey? securityKey = null;
         private string subject = "";
         private string issuer = "";
         private string audience = "";
-        private Dictionary<string, string> claims = new Dictionary<string, string>();
+        private readonly Dictionary<string, string> claims = new Dictionary<string, string>();
         private int expiryInMinutes = 5;
 
-        public TokenJWTBuilder AddSecurityKey(SecurityKey securityKey)
+        public TokenJwtBuilder AddSecurityKey(SecurityKey securityKey)
         {
             this.securityKey = securityKey;
             return this;
         }
 
-        public TokenJWTBuilder AddSubject(string subject)
+        public TokenJwtBuilder AddSubject(string subject)
         {
             this.subject = subject;
             return this;
         }
 
-        public TokenJWTBuilder AddIssuer(string issuer)
+        public TokenJwtBuilder AddIssuer(string issuer)
         {
             this.issuer = issuer;
             return this;
         }
 
-        public TokenJWTBuilder AddAudience(string audience)
+        public TokenJwtBuilder AddAudience(string audience)
         {
             this.audience = audience;
             return this;
         }
 
-        public TokenJWTBuilder AddClaim(string type, string value)
+        public TokenJwtBuilder AddClaim(string type, string value)
         {
             claims.Add(type, value);
             return this;
         }
 
-        public TokenJWTBuilder AddClaims(Dictionary<string, string> claims)
+        public TokenJwtBuilder AddClaims(Dictionary<string, string> claims)
         {
             this.claims.Union(claims);
             return this;
         }
 
-        public TokenJWTBuilder AddExpiry(int expiryInMinutes)
+        public TokenJwtBuilder AddExpiry(int expiryInMinutes)
         {
             this.expiryInMinutes = expiryInMinutes;
             return this;

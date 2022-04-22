@@ -2,7 +2,7 @@
 
 namespace MarketPlace.Interfaces.IRepository
 {
-    public interface IProdutoRepository : IGenericRepository<Produto, Guid>
+    public interface IProdutoRepository : IGenericRepository<Produto, int>
     {
         Task<List<Produto>> ListProdutos();
     }

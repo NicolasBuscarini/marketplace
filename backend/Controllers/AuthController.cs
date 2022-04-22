@@ -20,7 +20,7 @@ namespace MarketPlace.Controllers
 
         [AllowAnonymous]
         [HttpPost("sign-up")]
-        public async Task<ActionResult> SignUp([FromBody] SignUpDTO signUpDTO)
+        public async Task<ActionResult> SignUp([FromBody] SignUpDto signUpDTO)
         {
             try
             {
