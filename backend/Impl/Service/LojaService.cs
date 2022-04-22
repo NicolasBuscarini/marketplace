@@ -23,14 +23,23 @@ namespace MarketPlace.Impl.Service
         {
             ApplicationUser currentUser = await _authService.GetCurrentUser();
 
+            if (Domain.Models.Enums.EnumUserType.Cliente == currentUser.EnumUserType)
+                throw new ArgumentException("Você precisa criar uma conta com CNPJ.");
+
             Loja loja = new(lojaDto, currentUser.Id);
 
             return await _lojaRepository.CreateAsync(loja);
         }
 
-        public Task<bool> DeleteLoja(int id)
+        public async Task<bool> DeleteLoja(int id)
         {
-            throw new NotImplementedException();
+            ApplicationUser currentUser = await _authService.GetCurrentUser();
+            Loja loja = await _lojaRepository.GetByIdAsync(id);
+
+            if (loja.UserId != currentUser.Id)
+                throw new ArgumentException("Propietario da loja diferende de usuario logado.");
+
+            return await _lojaRepository.DeleteAsync(loja);
         }
 
         public Task<bool> DesativarLoja(int id)
@@ -43,14 +52,26 @@ namespace MarketPlace.Impl.Service
             throw new NotImplementedException();
         }
 
-        public Task<Loja> GetLojaById(int id)
+        public async Task<Loja> GetLojaById(int id)
         {
-            throw new NotImplementedException();
+            Loja loja = await _lojaRepository.GetByIdAsync(id);
+            return loja;
         }
 
-        public Task<bool> UpdateLoja(LojaDto lojaDto)
+        public async Task<int> UpdateLoja(LojaDto lojaDto)
         {
-            throw new NotImplementedException();
+            ApplicationUser currentUser = await _authService.GetCurrentUser();
+            Loja loja = await _lojaRepository.GetByIdAsync(lojaDto.Id);
+
+            if ( null == loja )
+                throw new ArgumentException("Loja nao encontrada.");
+            if ( currentUser.Id.Equals(loja.UserId) )
+                throw new ArgumentException("Propietario da loja diferende de usuario logado.");
+            
+            loja.Nome = lojaDto.Nome;
+            loja.Descricao = lojaDto.Descricao;
+            
+            return await _lojaRepository.UpdateAsync(loja);
         }
     }
 }

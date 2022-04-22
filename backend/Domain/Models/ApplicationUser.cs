@@ -10,13 +10,13 @@ namespace MarketPlace.Domain.Models
         public string NomeCompleto { get; set; }
         public DateTime DataNascimento { get; set; }
         public string Endereco { get; set; }
-        public string Endereco2 { get; set; }
+        public string? Endereco2 { get; set; }
         public int Cep { get; set; }
         public EnumUserType EnumUserType { get; set; }
 
         public UserDto UserDTO()
         {
-            UserDto userDTO = new UserDto
+            UserDto userDTO = new()
             {
                 Id = Id,
                 UserName = UserName,

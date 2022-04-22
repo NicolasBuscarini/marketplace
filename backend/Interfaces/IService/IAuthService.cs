@@ -9,7 +9,7 @@ namespace MarketPlace.Interfaces.IService
         Task<ApplicationUser> GetUserById(Guid userId);
         Task<int> UpdateUser(ApplicationUser user);
         Task<bool> DeleteUser(Guid userId);
-        Task<bool> SignUp(SignUpDTO signUpDTO);
+        Task<bool> SignUp(SignUpDto signUpDTO);
         Task<SsoDTO> SignIn(SignInDTO signInDTO);
         Task<ApplicationUser> GetCurrentUser();
     }

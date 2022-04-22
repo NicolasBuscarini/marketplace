@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace MarketPlace.Impl.Repository
 {
-    public class LojaRepository : GenericRepository<Loja, Guid>, ILojaRepository
+    public class LojaRepository : GenericRepository<Loja, int>, ILojaRepository
     {
         private readonly MySQLContext _context;
         public LojaRepository(MySQLContext context) : base(context)
@@ -15,7 +15,7 @@ namespace MarketPlace.Impl.Repository
 
         public async Task<List<Loja>> ListLojas()
         {
-            List<Loja> list = await _context.Loja.ToListAsync();
+            List<Loja> list = await _context.Loja.Include(x => x.Produtos).ToListAsync();
 
             return list;
         }

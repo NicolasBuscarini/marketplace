@@ -6,7 +6,7 @@ namespace MarketPlace.Interfaces.IService
     public interface IProdutoService
     {
         Task<Produto> CreateProduto(ProdutoDto produtoDto);
-        Task<bool> UpdateProduto(ProdutoDto produtoDto);
+        Task<int> UpdateProduto(ProdutoDto produtoDto);
         Task<bool> DeleteProduto(int id);
         Task<bool> DesativarProduto(int id);
         Task<Produto> GetProdutoById(int id);

@@ -20,9 +20,9 @@ namespace MarketPlace.Impl.Repository
             return list;
         }
 
-        public async Task<ApplicationUser> GetByCpfCnpjAsync(string cpfCpnj)
+        public async Task<ApplicationUser?> GetByCpfCnpjAsync(string cpfCnpj)
         {
-            ApplicationUser applicationUser = await _context.User.Where(p => p.CpfCnpj.Equals(cpfCpnj, StringComparison.Ordinal)).FirstOrDefaultAsync();
+            ApplicationUser? applicationUser = await _context.User.Where(p => p.CpfCnpj.Equals(cpfCnpj, StringComparison.Ordinal)).FirstOrDefaultAsync();
             return applicationUser;
         }
     }
