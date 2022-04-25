@@ -4,88 +4,87 @@ using MarketPlace.Interfaces.IService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace MarketPlace.Controllers
+namespace MarketPlace.Controllers;
+
+[Authorize]
+[Route("api/[controller]")]
+[ApiController]
+public class LojaController : ControllerBase
 {
-    [Authorize]
-    [Route("api/[controller]")]
-    [ApiController]
-    public class LojaController : ControllerBase
+    private readonly ILojaService _lojaService;
+
+    public LojaController(ILojaService lojaService)
     {
-        private readonly ILojaService _lojaService;
+        _lojaService = lojaService;
+    }
 
-        public LojaController(ILojaService lojaService)
+    [AllowAnonymous]
+    [HttpPost("create-loja")]
+    public async Task<ActionResult> CreateLoja([FromBody] LojaDto lojaDto)
+    {
+        try
         {
-            _lojaService = lojaService;
+            return Ok(await _lojaService.CreateLoja(lojaDto));
         }
-
-        [AllowAnonymous]
-        [HttpPost("create-loja")]
-        public async Task<ActionResult> CreateLoja([FromBody] LojaDto lojaDto)
+        catch (Exception ex)
         {
-            try
-            {
-                return Ok(await _lojaService.CreateLoja(lojaDto));
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            return BadRequest(ex.Message);
         }
+    }
 
-        [HttpGet("get-all-lojas")]
-        public async Task<ActionResult> GetAllLojas()
+    [HttpGet("get-all-lojas")]
+    public async Task<ActionResult> GetAllLojas()
+    {
+        try
         {
-            try
-            {
-                List<Loja> listLoja = await _lojaService.GetAllLojas();
+            List<Loja> listLoja = await _lojaService.GetAllLojas();
 
-                return Ok(listLoja);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            return Ok(listLoja);
         }
-
-        [HttpGet("get-loja")]
-        public async Task<ActionResult> GetLojaByLojaId([FromQuery] int lojaId)
+        catch (Exception ex)
         {
-            try
-            {
-                Loja loja = await _lojaService.GetLojaById(lojaId);
-
-                return Ok(loja);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            return BadRequest(ex.Message);
         }
+    }
 
-        [HttpPost("desativar-loja")]
-        public async Task<ActionResult> DesativarLoja([FromBody] int lojaId)
+    [HttpGet("get-loja")]
+    public async Task<ActionResult> GetLojaByLojaId([FromQuery] int lojaId)
+    {
+        try
         {
-            try
-            {
-                return Ok(await _lojaService.DesativarLoja(lojaId));
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            Loja loja = await _lojaService.GetLojaById(lojaId);
+
+            return Ok(loja);
         }
-
-        [HttpPost("update-loja")]
-        public async Task<ActionResult> UpdateLoja([FromBody] LojaDto lojaDto)
+        catch (Exception ex)
         {
-            try
-            {
-                return Ok(await _lojaService.UpdateLoja(lojaDto));
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            return BadRequest(ex.Message);
+        }
+    }
+
+    [HttpPost("desativar-loja")]
+    public async Task<ActionResult> DesativarLoja([FromBody] int lojaId)
+    {
+        try
+        {
+            return Ok(await _lojaService.DesativarLoja(lojaId));
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
+    }
+
+    [HttpPost("update-loja")]
+    public async Task<ActionResult> UpdateLoja([FromBody] LojaDto lojaDto)
+    {
+        try
+        {
+            return Ok(await _lojaService.UpdateLoja(lojaDto));
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
         }
     }
 }
