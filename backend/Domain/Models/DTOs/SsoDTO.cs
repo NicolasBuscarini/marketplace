@@ -1,12 +1,12 @@
 ﻿namespace MarketPlace.Domain.Models.DTOs
 {
-    public class SsoDTO
+    public class SsoDto
     {
         public string Access_token { get; set; }
         public DayOfWeek Expiration { get; set; }
         public ApplicationUser User { get; set; }
 
-        public SsoDTO(string access_token, DateTime expiration, ApplicationUser user)
+        public SsoDto(string access_token, DateTime expiration, ApplicationUser user)
         {
 
             this.Access_token = access_token;
