@@ -27,10 +27,10 @@ public class ProdutoService : IProdutoService
         return await _produtoRepository.CreateAsync(produto);
     }
 
-    public async Task<bool> DeleteProduto(int id)
+    public async Task<bool> DeleteProduto(Guid id)
     {
         ApplicationUser currentUser = await _authService.GetCurrentUser();
-        if ( currentUser.EnumUserType == EnumUserType.Admin ) throw new ArgumentException("Apenas administrador");
+        if ( EnumUserType.Admin == currentUser.EnumUserType ) throw new ArgumentException("Apenas administrador");
             
         Produto produto = await _produtoRepository.GetByIdAsync(id);
         if (produto == null) throw new ArgumentException("Produto não encontrado");
@@ -38,7 +38,7 @@ public class ProdutoService : IProdutoService
         return await _produtoRepository.DeleteAsync(produto);
     }
 
-    public Task<bool> DesativarProduto(int id)
+    public Task<bool> DesativarProduto(Guid id)
     {
         throw new NotImplementedException();
     }
@@ -49,7 +49,7 @@ public class ProdutoService : IProdutoService
         return produtos;
     }
 
-    public async Task<Produto> GetProdutoById(int id)
+    public async Task<Produto> GetProdutoById(Guid id)
     {
         Produto produto = await _produtoRepository.GetByIdAsync(id);
         return produto;

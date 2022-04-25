@@ -7,8 +7,8 @@ public interface ILojaService
 {
     Task<Loja> CreateLoja(LojaDto lojaDto);
     Task<int> UpdateLoja(LojaDto lojaDto);
-    Task<bool> DeleteLoja(int id);
-    Task<bool> DesativarLoja(int id);
-    Task<Loja> GetLojaById(int id);
+    Task<bool> DeleteLoja(Guid id);
+    Task<bool> DesativarLoja(Guid id);
+    Task<Loja> GetLojaById(Guid id);
     Task<List<Loja>> GetAllLojas();
 }

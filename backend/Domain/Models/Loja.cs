@@ -1,12 +1,13 @@
 ﻿using MarketPlace.Domain.Models.DTOs;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
+using MarketPlace.Interfaces.IGeneric;
 
 namespace MarketPlace.Domain.Models;
 
-public class Loja
+public class Loja : IResultSearch
 {
-    public int Id { get; private set; }
+    public Guid Id { get; set; }
     public string Nome { get;  set; }
     public string Descricao { get;  set; }
     public decimal Cnpj { get; }

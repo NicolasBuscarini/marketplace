@@ -31,7 +31,7 @@ public class LojaService : ILojaService
         return await _lojaRepository.CreateAsync(loja);
     }
 
-    public async Task<bool> DeleteLoja(int id)
+    public async Task<bool> DeleteLoja(Guid id)
     {
         ApplicationUser currentUser = await _authService.GetCurrentUser();
         Loja loja = await _lojaRepository.GetByIdAsync(id);
@@ -42,7 +42,7 @@ public class LojaService : ILojaService
         return await _lojaRepository.DeleteAsync(loja);
     }
 
-    public Task<bool> DesativarLoja(int id)
+    public Task<bool> DesativarLoja(Guid id)
     {
         throw new NotImplementedException();
     }
@@ -52,7 +52,7 @@ public class LojaService : ILojaService
         throw new NotImplementedException();
     }
 
-    public async Task<Loja> GetLojaById(int id)
+    public async Task<Loja> GetLojaById(Guid id)
     {
         Loja loja = await _lojaRepository.GetByIdAsync(id);
         return loja;

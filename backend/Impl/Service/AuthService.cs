@@ -110,7 +110,7 @@ public class AuthService : IAuthService
             Endereco = signUpDTO.Endereco,
             Endereco2 = signUpDTO.Endereco2,
             DataNascimento = signUpDTO.DataNascimento,
-            NomeCompleto = signUpDTO.NomeCompleto,
+            Nome = signUpDTO.NomeCompleto,
             PhoneNumber = signUpDTO.PhoneNumber,
             EnumUserType = enumUserType
         };

@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace MarketPlace.Impl.Repository;
 
-public class LojaRepository : GenericRepository<Loja, int>, ILojaRepository
+public class LojaRepository : GenericRepository<Loja, Guid>, ILojaRepository
 {
     private readonly MySQLContext _context;
     public LojaRepository(MySQLContext context) : base(context)
