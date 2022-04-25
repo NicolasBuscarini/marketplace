@@ -40,7 +40,7 @@ public class AuthController : ControllerBase
     {
         try
         {
-            SsoDTO ssoDTO = await _authService.SignIn(signInDTO);
+            SsoDto ssoDTO = await _authService.SignIn(signInDTO);
 
             return Ok(ssoDTO);
         }

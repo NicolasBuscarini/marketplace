@@ -126,7 +126,7 @@ public class AuthService : IAuthService
         return true;
     }
 
-    public async Task<SsoDTO> SignIn(SignInDTO signInDTO)
+    public async Task<SsoDto> SignIn(SignInDTO signInDTO)
     {
         ApplicationUser? user = await _userManager.FindByNameAsync(signInDTO.Username);
         if (user == null)
@@ -160,7 +160,7 @@ public class AuthService : IAuthService
             signingCredentials: new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256)
         );
 
-        return new SsoDTO(new JwtSecurityTokenHandler().WriteToken(token), token.ValidTo, user);
+        return new SsoDto(new JwtSecurityTokenHandler().WriteToken(token), token.ValidTo, user);
     }
 
     public async Task<ApplicationUser> GetCurrentUser()
