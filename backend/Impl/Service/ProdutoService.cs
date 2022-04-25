@@ -1,5 +1,6 @@
 ﻿using MarketPlace.Domain.Models;
 using MarketPlace.Domain.Models.DTOs;
+using MarketPlace.Domain.Models.Enums;
 using MarketPlace.Interfaces.IRepository;
 using MarketPlace.Interfaces.IService;
 
@@ -7,15 +8,15 @@ namespace MarketPlace.Impl.Service;
 
 public class ProdutoService : IProdutoService
 {
-    private readonly IUserRepository _userRepository;
+    private readonly IAuthService _authService;
     private readonly IProdutoRepository _produtoRepository;
 
     public ProdutoService(
-        IUserRepository userRepository,
+        IAuthService authService,
         IProdutoRepository produtoRepository
     )
     {
-        _userRepository = userRepository;
+        _authService = authService;
         _produtoRepository = produtoRepository;
     }
 
@@ -26,9 +27,15 @@ public class ProdutoService : IProdutoService
         return await _produtoRepository.CreateAsync(produto);
     }
 
-    public Task<bool> DeleteProduto(int id)
+    public async Task<bool> DeleteProduto(int id)
     {
-        throw new NotImplementedException();
+        ApplicationUser currentUser = await _authService.GetCurrentUser();
+        if ( currentUser.EnumUserType == EnumUserType.Admin ) throw new ArgumentException("Apenas administrador");
+            
+        Produto produto = await _produtoRepository.GetByIdAsync(id);
+        if (produto == null) throw new ArgumentException("Produto não encontrado");
+
+        return await _produtoRepository.DeleteAsync(produto);
     }
 
     public Task<bool> DesativarProduto(int id)
@@ -36,14 +43,16 @@ public class ProdutoService : IProdutoService
         throw new NotImplementedException();
     }
 
-    public Task<List<Produto>> GetAllProdutos()
+    public async Task<List<Produto>> GetAllProdutos()
     {
-        throw new NotImplementedException();
+        List<Produto> produtos = await _produtoRepository.ListProdutos();
+        return produtos;
     }
 
-    public Task<Produto> GetProdutoById(int id)
+    public async Task<Produto> GetProdutoById(int id)
     {
-        throw new NotImplementedException();
+        Produto produto = await _produtoRepository.GetByIdAsync(id);
+        return produto;
     }
 
     public Task<int> UpdateProduto(ProdutoDto produtoDto)

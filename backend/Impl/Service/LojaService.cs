@@ -37,7 +37,7 @@ public class LojaService : ILojaService
         Loja loja = await _lojaRepository.GetByIdAsync(id);
 
         if (loja.UserId != currentUser.Id)
-            throw new ArgumentException("Propietario da loja diferende de usuario logado.");
+            throw new ArgumentException("Propietário da loja diferende de usuario logado.");
 
         return await _lojaRepository.DeleteAsync(loja);
     }
@@ -66,7 +66,7 @@ public class LojaService : ILojaService
         if ( null == loja )
             throw new ArgumentException("Loja nao encontrada.");
         if ( currentUser.Id.Equals(loja.UserId) )
-            throw new ArgumentException("Propietario da loja diferende de usuario logado.");
+            throw new ArgumentException("Propietário da loja diferente de usuario logado.");
             
         loja.Nome = lojaDto.Nome;
         loja.Descricao = lojaDto.Descricao;
