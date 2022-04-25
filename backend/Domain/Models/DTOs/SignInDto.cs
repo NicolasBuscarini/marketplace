@@ -2,7 +2,7 @@
 
 namespace MarketPlace.Domain.Models.DTOs;
 
-public class SignInDTO
+public class SignInDto
 {
     [Required(ErrorMessage = "User Name is required")]
     public string Username { get; set; }

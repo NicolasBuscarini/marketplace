@@ -10,6 +10,6 @@ public interface IAuthService
     Task<int> UpdateUser(ApplicationUser user);
     Task<bool> DeleteUser(Guid userId);
     Task<bool> SignUp(SignUpDto signUpDTO);
-    Task<SsoDto> SignIn(SignInDTO signInDTO);
+    Task<SsoDto> SignIn(SignInDto signInDTO);
     Task<ApplicationUser> GetCurrentUser();
 }

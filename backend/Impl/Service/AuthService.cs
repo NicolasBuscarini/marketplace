@@ -126,7 +126,7 @@ public class AuthService : IAuthService
         return true;
     }
 
-    public async Task<SsoDto> SignIn(SignInDTO signInDTO)
+    public async Task<SsoDto> SignIn(SignInDto signInDTO)
     {
         ApplicationUser? user = await _userManager.FindByNameAsync(signInDTO.Username);
         if (user == null)

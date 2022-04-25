@@ -36,7 +36,7 @@ public class AuthController : ControllerBase
 
     [AllowAnonymous]
     [HttpPost("sign-in")]
-    public async Task<ActionResult> SignIn([FromBody] SignInDTO signInDTO)
+    public async Task<ActionResult> SignIn([FromBody] SignInDto signInDTO)
     {
         try
         {
