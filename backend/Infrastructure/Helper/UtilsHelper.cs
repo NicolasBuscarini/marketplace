@@ -4,8 +4,8 @@ public static class UtilsHelper
 {
     public static bool IsCnpj(string cnpj)
     {
-        int[] multiplicador1 = new int[12] { 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2 };
-        int[] multiplicador2 = new int[13] { 6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2 };
+        int[] multiplicador1 = { 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2 };
+        int[] multiplicador2 = { 6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2 };
         cnpj = cnpj.Trim();
         cnpj = cnpj.Replace(".", "").Replace("-", "").Replace("/", "");
         if (cnpj.Length != 14)
@@ -35,8 +35,8 @@ public static class UtilsHelper
 
     public static bool IsCpf(string cpf)
     {
-        int[] multiplicador1 = new int[9] { 10, 9, 8, 7, 6, 5, 4, 3, 2 };
-        int[] multiplicador2 = new int[10] { 11, 10, 9, 8, 7, 6, 5, 4, 3, 2 };
+        int[] multiplicador1 = { 10, 9, 8, 7, 6, 5, 4, 3, 2 };
+        int[] multiplicador2 = { 11, 10, 9, 8, 7, 6, 5, 4, 3, 2 };
 
         cpf = cpf.Trim();
         cpf = cpf.Replace(".", "").Replace("-", "");

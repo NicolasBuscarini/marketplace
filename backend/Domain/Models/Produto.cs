@@ -13,7 +13,7 @@ public class Produto : IResultSearch
     public int Estoque { get; private set; }
 
     public Guid LojaId { get; private set; }
-    [ForeignKey("LojaId")] public Loja? Loja { get; private set; }
+    [ForeignKey("LojaId")] public Loja? Loja => null;
 
     public Produto(string nome, string descricao, decimal preco, int estoque, Guid lojaId)
     {

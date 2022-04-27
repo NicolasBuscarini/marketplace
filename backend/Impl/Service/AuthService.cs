@@ -20,8 +20,7 @@ public class AuthService : IAuthService
     private readonly IHttpContextAccessor _httpContextAccessor;
     private readonly UserManager<ApplicationUser> _userManager;
 
-    public AuthService(IUserRepository userRepository, IConfiguration configuration,
-        SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager,
+    public AuthService(IUserRepository userRepository, IConfiguration configuration, UserManager<ApplicationUser> userManager,
         IHttpContextAccessor httpContextAccessor)
     {
         _userRepository = userRepository;
@@ -71,26 +70,26 @@ public class AuthService : IAuthService
         return true;
     }
 
-    public async Task<bool> SignUp(SignUpDto signUpDTO)
+    public async Task<bool> SignUp(SignUpDto signUpDto)
     {
-        var userExists = await _userManager.FindByNameAsync(signUpDTO.Username);
+        ApplicationUser? userExists = await _userManager.FindByNameAsync(signUpDto.Username);
         if (userExists != null)
             throw new ArgumentException("Username already exists!");
 
-        userExists = await _userManager.FindByEmailAsync(signUpDTO.Email);
+        userExists = await _userManager.FindByEmailAsync(signUpDto.Email);
         if (userExists != null)
             throw new ArgumentException("Email already exists!");
 
-        signUpDTO.CpfCnpj = signUpDTO.CpfCnpj.Replace(".", "");
-        signUpDTO.CpfCnpj = signUpDTO.CpfCnpj.Replace(" ", "");
-        signUpDTO.CpfCnpj = signUpDTO.CpfCnpj.Replace("-", "");
+        signUpDto.CpfCnpj = signUpDto.CpfCnpj.Replace(".", "");
+        signUpDto.CpfCnpj = signUpDto.CpfCnpj.Replace(" ", "");
+        signUpDto.CpfCnpj = signUpDto.CpfCnpj.Replace("-", "");
 
         EnumUserType enumUserType;
-        if (UtilsHelper.IsCpf(signUpDTO.CpfCnpj))
+        if (UtilsHelper.IsCpf(signUpDto.CpfCnpj))
         {
             enumUserType = EnumUserType.Cliente;
         }
-        else if (!UtilsHelper.IsCnpj(signUpDTO.CpfCnpj))
+        else if (!UtilsHelper.IsCnpj(signUpDto.CpfCnpj))
         {
             enumUserType = EnumUserType.Vendedor;
         }
@@ -99,26 +98,26 @@ public class AuthService : IAuthService
             throw new ArgumentException("CPF/CNPJ inválido! Digite um válido");
         }
 
-        userExists = await _userRepository.GetByCpfCnpjAsync(signUpDTO.CpfCnpj);
+        userExists = await _userRepository.GetByCpfCnpjAsync(signUpDto.CpfCnpj);
         if (userExists != null)
             throw new ArgumentException("CPF/CNPJ already exists!");
 
         ApplicationUser user = new()
         {
-            Email = signUpDTO.Email,
+            Email = signUpDto.Email,
             SecurityStamp = Guid.NewGuid().ToString(),
-            UserName = signUpDTO.Username,
-            CpfCnpj = signUpDTO.CpfCnpj,
-            Cep = signUpDTO.Cep,
-            Endereco = signUpDTO.Endereco,
-            Endereco2 = signUpDTO.Endereco2,
-            DataNascimento = signUpDTO.DataNascimento,
-            Nome = signUpDTO.NomeCompleto,
-            PhoneNumber = signUpDTO.PhoneNumber,
+            UserName = signUpDto.Username,
+            CpfCnpj = signUpDto.CpfCnpj,
+            Cep = signUpDto.Cep,
+            Endereco = signUpDto.Endereco,
+            Endereco2 = signUpDto.Endereco2,
+            DataNascimento = signUpDto.DataNascimento,
+            Nome = signUpDto.NomeCompleto,
+            PhoneNumber = signUpDto.PhoneNumber,
             EnumUserType = enumUserType
         };
 
-        var result = await _userManager.CreateAsync(user, signUpDTO.Password);
+        var result = await _userManager.CreateAsync(user, signUpDto.Password);
 
         if (!result.Succeeded)
             if (result.Errors.ToList().Count > 0)
@@ -129,13 +128,13 @@ public class AuthService : IAuthService
         return true;
     }
 
-    public async Task<SsoDto> SignIn(SignInDto signInDTO)
+    public async Task<SsoDto> SignIn(SignInDto signInDto)
     {
-        ApplicationUser? user = await _userManager.FindByNameAsync(signInDTO.Username);
+        ApplicationUser? user = await _userManager.FindByNameAsync(signInDto.Username);
         if (user == null)
             throw new ArgumentException("Usuário não encontrado.");
 
-        if (!await _userManager.CheckPasswordAsync(user, signInDTO.Password))
+        if (!await _userManager.CheckPasswordAsync(user, signInDto.Password))
             throw new ArgumentException("Senha inválida.");
 
         var userRoles = await _userManager.GetRolesAsync(user);
@@ -163,12 +162,12 @@ public class AuthService : IAuthService
             signingCredentials: new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256)
         );
 
-        return new SsoDto(new JwtSecurityTokenHandler().WriteToken(token), token.ValidTo, user);
+        return new SsoDto(new JwtSecurityTokenHandler().WriteToken(token), user);
     }
 
     public async Task<ApplicationUser> GetCurrentUser()
     {
-        ApplicationUser? user = await _userManager.GetUserAsync(_httpContextAccessor.HttpContext.User);
+        ApplicationUser? user = await _userManager.GetUserAsync(_httpContextAccessor.HttpContext!.User);
 
         return user;
     }

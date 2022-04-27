@@ -10,8 +10,8 @@ public class MySqlContext : IdentityDbContext<ApplicationUser, ApplicationRole, 
     {
     }
 
-    public DbSet<Produto> Produto { get; set; }
-    public DbSet<Loja> Loja { get; set; }
-    public DbSet<ApplicationUser> User { get; set; }
-    public DbSet<ApplicationRole> Role { get; set; }
+    public DbSet<Produto> Produto { get; set; } = null!;
+    public DbSet<Loja> Loja { get; set; } = null!;
+    public DbSet<ApplicationUser> User { get; set; } = null!;
+    public DbSet<ApplicationRole> Role { get; set; } = null!;
 }

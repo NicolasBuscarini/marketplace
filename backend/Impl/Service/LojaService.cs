@@ -42,11 +42,6 @@ public class LojaService : ILojaService
         return await _lojaRepository.DeleteAsync(loja);
     }
 
-    public Task<bool> DesativarLoja(Guid id)
-    {
-        throw new NotImplementedException();
-    }
-
     public Task<List<Loja>> GetAllLojas()
     {
         throw new NotImplementedException();

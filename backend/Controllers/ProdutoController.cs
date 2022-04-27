@@ -61,19 +61,6 @@ public class ProdutoController : ControllerBase
         }
     }
 
-    [HttpPost("desativar-produto")]
-    public async Task<ActionResult> DesativarProduto([FromBody] Guid produtoId)
-    {
-        try
-        {
-            return Ok(await _produtoService.DesativarProduto(produtoId));
-        }
-        catch (Exception ex)
-        {
-            return BadRequest(ex.Message);
-        }
-    }
-
     [HttpPost("update-produto")]
     public async Task<ActionResult> UpdateProduto([FromBody] ProdutoDto produtoDto)
     {

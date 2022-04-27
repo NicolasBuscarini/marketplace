@@ -7,23 +7,23 @@ namespace MarketPlace.Domain.Models;
 
 public class ApplicationUser : IdentityUser<Guid>, IResultSearch
 {
-    public string CpfCnpj { get; set; }
-    public string Nome { get; set; }
+    public string CpfCnpj { get; set; } = null!;
+    public string Nome { get; set; } = null!;
     public DateTime DataNascimento { get; set; }
-    public string Endereco { get; set; }
+    public string Endereco { get; set; } = null!;
     public string? Endereco2 { get; set; }
     public int Cep { get; set; }
     public EnumUserType EnumUserType { get; set; }
 
-    public UserDto UserDTO()
+    public UserDto UserDto()
     {
-        UserDto userDTO = new()
+        UserDto userDto = new()
         {
             Id = Id,
             UserName = UserName,
             Email = Email
         };
 
-        return userDTO;
+        return userDto;
     }
 }

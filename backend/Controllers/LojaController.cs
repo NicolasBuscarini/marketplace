@@ -18,7 +18,6 @@ public class LojaController : ControllerBase
         _lojaService = lojaService;
     }
 
-    [AllowAnonymous]
     [HttpPost("create-loja")]
     public async Task<ActionResult> CreateLoja([FromBody] LojaDto lojaDto)
     {
@@ -55,19 +54,6 @@ public class LojaController : ControllerBase
             Loja loja = await _lojaService.GetLojaById(lojaId);
 
             return Ok(loja);
-        }
-        catch (Exception ex)
-        {
-            return BadRequest(ex.Message);
-        }
-    }
-
-    [HttpPost("desativar-loja")]
-    public async Task<ActionResult> DesativarLoja([FromBody] Guid lojaId)
-    {
-        try
-        {
-            return Ok(await _lojaService.DesativarLoja(lojaId));
         }
         catch (Exception ex)
         {

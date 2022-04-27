@@ -20,11 +20,11 @@ public class AuthController : ControllerBase
 
     [AllowAnonymous]
     [HttpPost("sign-up")]
-    public async Task<ActionResult> SignUp([FromBody] SignUpDto signUpDTO)
+    public async Task<ActionResult> SignUp([FromBody] SignUpDto signUpDto)
     {
         try
         {
-            bool ret = await _authService.SignUp(signUpDTO);
+            bool ret = await _authService.SignUp(signUpDto);
 
             return Ok(ret);
         }

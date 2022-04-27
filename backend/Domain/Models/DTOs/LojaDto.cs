@@ -3,6 +3,6 @@
 public class LojaDto
 {
     public Guid Id { get; set; }
-    public string Nome { get; set; }
-    public string Descricao { get; set; }
+    public string Nome { get; set; } = null!;
+    public string Descricao { get; set; } = null!;
 }

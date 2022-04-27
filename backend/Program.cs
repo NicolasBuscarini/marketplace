@@ -8,21 +8,21 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
 
-var builder = WebApplication.CreateBuilder(args);
+WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 string mySqlConnection = builder.Configuration.GetConnectionString("DefaultConnection");
-string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+const string myAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy(name: MyAllowSpecificOrigins,
-        builder =>
+    options.AddPolicy(name: myAllowSpecificOrigins,
+        policyBuilder =>
         {
-            builder.WithOrigins("http://localhost:4200/");
+            policyBuilder.WithOrigins("http://localhost:4200/");
         });
 });
 
