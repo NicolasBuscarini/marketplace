@@ -18,7 +18,6 @@ public class ProdutoController : ControllerBase
         _produtoService = produtoService;
     }
 
-    [AllowAnonymous]
     [HttpPost("create-produto")]
     public async Task<ActionResult> CreateProduto([FromBody] ProdutoDto produtoDto)
     {
@@ -48,7 +47,7 @@ public class ProdutoController : ControllerBase
     }
 
     [HttpGet("get-produto")]
-    public async Task<ActionResult> GetProdutoByProdutoId([FromQuery] int produtoId)
+    public async Task<ActionResult> GetProdutoByProdutoId([FromQuery] Guid produtoId)
     {
         try
         {
@@ -63,7 +62,7 @@ public class ProdutoController : ControllerBase
     }
 
     [HttpPost("desativar-produto")]
-    public async Task<ActionResult> DesativarProduto([FromBody] int produtoId)
+    public async Task<ActionResult> DesativarProduto([FromBody] Guid produtoId)
     {
         try
         {
@@ -87,5 +86,4 @@ public class ProdutoController : ControllerBase
             return BadRequest(ex.Message);
         }
     }
-
 }

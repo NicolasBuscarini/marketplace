@@ -15,5 +15,7 @@ public class CustomClaimTypes
     public const string Hierarchy = "http://schemas.xmlsoap.org/ws/2009/09/identity/claims/hierarchy";
     public const string Permission = "http://schemas.xmlsoap.org/ws/2009/09/identity/claims/permission";
     public const string PermissionBlock = "http://schemas.xmlsoap.org/ws/2009/09/identity/claims/permission.block";
-    public const string ForcePasswordChange = "http://schemas.xmlsoap.org/ws/2009/09/identity/claims/force.password.change";
+
+    public const string ForcePasswordChange =
+        "http://schemas.xmlsoap.org/ws/2009/09/identity/claims/force.password.change";
 }

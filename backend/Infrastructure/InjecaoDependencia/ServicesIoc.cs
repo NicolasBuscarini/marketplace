@@ -10,5 +10,6 @@ public static class ServicesIoc
         services.AddScoped<IAuthService, AuthService>();
         services.AddScoped<ILojaService, LojaService>();
         services.AddScoped<IProdutoService, ProdutoService>();
+        services.AddScoped<ISearchService, SearchService>();
     }
 }

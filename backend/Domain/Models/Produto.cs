@@ -1,19 +1,19 @@
 ﻿using MarketPlace.Domain.Models.DTOs;
 using System.ComponentModel.DataAnnotations.Schema;
+using MarketPlace.Interfaces.IGeneric;
 
 namespace MarketPlace.Domain.Models;
 
-public class Produto
+public class Produto : IResultSearch
 {
-    public int Id { get; set; }
-    public string Nome { get; private set; }
+    public Guid Id { get; set; }
+    public string Nome { get; set; }
     public string Descricao { get; private set; }
     public decimal Preco { get; private set; }
     public int Estoque { get; private set; }
 
     public int LojaId { get; private set; }
-    [ForeignKey("LojaId")]
-    public Loja? Loja { get; private set; }
+    [ForeignKey("LojaId")] public Loja? Loja { get; private set; }
 
     public Produto(string nome, string descricao, decimal preco, int estoque, int lojaId)
     {

@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace MarketPlace.Migrations
 {
-    [DbContext(typeof(MySQLContext))]
+    [DbContext(typeof(MySqlContext))]
     partial class MySQLContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

@@ -7,8 +7,8 @@ public interface IProdutoService
 {
     Task<Produto> CreateProduto(ProdutoDto produtoDto);
     Task<int> UpdateProduto(ProdutoDto produtoDto);
-    Task<bool> DeleteProduto(int id);
-    Task<bool> DesativarProduto(int id);
-    Task<Produto> GetProdutoById(int id);
+    Task<bool> DeleteProduto(Guid id);
+    Task<bool> DesativarProduto(Guid id);
+    Task<Produto> GetProdutoById(Guid id);
     Task<List<Produto>> GetAllProdutos();
 }

@@ -15,30 +15,29 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 
 builder.Services.AddAuthentication(options =>
-{
-    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-})
-
-.AddJwtBearer(options =>
-{
-    options.SaveToken = true;
-    options.RequireHttpsMetadata = false;
-    options.TokenValidationParameters = new TokenValidationParameters()
     {
-        ValidateIssuer = true,
-        ValidIssuer = builder.Configuration["JWT:ValidIssuer"],
+        options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+        options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+        options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+    })
+    .AddJwtBearer(options =>
+    {
+        options.SaveToken = true;
+        options.RequireHttpsMetadata = false;
+        options.TokenValidationParameters = new TokenValidationParameters()
+        {
+            ValidateIssuer = true,
+            ValidIssuer = builder.Configuration["JWT:ValidIssuer"],
 
-        ValidateAudience = true,
-        ValidAudience = builder.Configuration["JWT:ValidAudience"],
+            ValidateAudience = true,
+            ValidAudience = builder.Configuration["JWT:ValidAudience"],
 
-        ValidateIssuerSigningKey = true,
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWT:Secret"])),
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWT:Secret"])),
 
-        ValidateLifetime = true
-    };
-});
+            ValidateLifetime = true
+        };
+    });
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -51,31 +50,25 @@ string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 builder.Services.AddCors(options =>
 {
     options.AddPolicy(name: MyAllowSpecificOrigins,
-                      builder =>
-                      {
-                          builder.WithOrigins("http://localhost:4200/");
-                      });
+        builder => { builder.WithOrigins("http://localhost:4200/"); });
 });
 
-builder.Services.AddDbContextPool<MySQLContext>(options =>
-                options.UseMySql(mySqlConnection, ServerVersion.AutoDetect(mySqlConnection)));
+builder.Services.AddDbContextPool<MySqlContext>(options =>
+    options.UseMySql(mySqlConnection, ServerVersion.AutoDetect(mySqlConnection)));
 
 builder.Services.AddIdentity<ApplicationUser, ApplicationRole>()
-               .AddEntityFrameworkStores<MySQLContext>()
-               .AddDefaultTokenProviders();
+    .AddEntityFrameworkStores<MySqlContext>()
+    .AddDefaultTokenProviders();
 
 builder.Services.AddControllers();
 
-// Injeção de dependencias
+// Injeï¿½ï¿½o de dependencias
 ServicesIoc.Config(builder.Services);
 RepositoryIoc.Config(builder.Services);
 
-builder.Services.AddSwaggerGen(c =>
-{
-    c.SwaggerDoc("v1", new OpenApiInfo { Title = "MarketPlace", Version = "v1" });
-});
+builder.Services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo { Title = "MarketPlace", Version = "v1" }); });
 
-var app = builder.Build();
+WebApplication app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

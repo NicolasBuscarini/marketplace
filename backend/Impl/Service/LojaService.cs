@@ -31,7 +31,7 @@ public class LojaService : ILojaService
         return await _lojaRepository.CreateAsync(loja);
     }
 
-    public async Task<bool> DeleteLoja(int id)
+    public async Task<bool> DeleteLoja(Guid id)
     {
         ApplicationUser currentUser = await _authService.GetCurrentUser();
         Loja loja = await _lojaRepository.GetByIdAsync(id);
@@ -42,7 +42,7 @@ public class LojaService : ILojaService
         return await _lojaRepository.DeleteAsync(loja);
     }
 
-    public Task<bool> DesativarLoja(int id)
+    public Task<bool> DesativarLoja(Guid id)
     {
         throw new NotImplementedException();
     }
@@ -52,7 +52,7 @@ public class LojaService : ILojaService
         throw new NotImplementedException();
     }
 
-    public async Task<Loja> GetLojaById(int id)
+    public async Task<Loja> GetLojaById(Guid id)
     {
         Loja loja = await _lojaRepository.GetByIdAsync(id);
         return loja;
@@ -63,14 +63,14 @@ public class LojaService : ILojaService
         ApplicationUser currentUser = await _authService.GetCurrentUser();
         Loja loja = await _lojaRepository.GetByIdAsync(lojaDto.Id);
 
-        if ( null == loja )
+        if (null == loja)
             throw new ArgumentException("Loja nao encontrada.");
-        if ( currentUser.Id.Equals(loja.UserId) )
+        if (currentUser.Id.Equals(loja.UserId))
             throw new ArgumentException("Propietário da loja diferente de usuario logado.");
-            
+
         loja.Nome = lojaDto.Nome;
         loja.Descricao = lojaDto.Descricao;
-            
+
         return await _lojaRepository.UpdateAsync(loja);
     }
 }

@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace MarketPlace.Migrations
 {
-    [DbContext(typeof(MySQLContext))]
+    [DbContext(typeof(MySqlContext))]
     [Migration("20220420151321_UpdateUser")]
     partial class UpdateUser
     {

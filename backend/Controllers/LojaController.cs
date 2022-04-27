@@ -48,7 +48,7 @@ public class LojaController : ControllerBase
     }
 
     [HttpGet("get-loja")]
-    public async Task<ActionResult> GetLojaByLojaId([FromQuery] int lojaId)
+    public async Task<ActionResult> GetLojaByLojaId([FromQuery] Guid lojaId)
     {
         try
         {
@@ -63,7 +63,7 @@ public class LojaController : ControllerBase
     }
 
     [HttpPost("desativar-loja")]
-    public async Task<ActionResult> DesativarLoja([FromBody] int lojaId)
+    public async Task<ActionResult> DesativarLoja([FromBody] Guid lojaId)
     {
         try
         {

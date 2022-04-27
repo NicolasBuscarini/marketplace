@@ -10,5 +10,6 @@ public static class RepositoryIoc
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<ILojaRepository, LojaRepository>();
         services.AddScoped<IProdutoRepository, ProdutoRepository>();
+        services.AddScoped<ISearchRepository, SearchRepository>();
     }
 }

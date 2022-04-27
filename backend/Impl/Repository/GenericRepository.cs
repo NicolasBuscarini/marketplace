@@ -6,9 +6,9 @@ namespace MarketPlace.Impl.Repository;
 
 public class GenericRepository<T, T_KEY> : IGenericRepository<T, T_KEY> where T : class where T_KEY : struct
 {
-    private readonly MySQLContext _context;
+    private readonly MySqlContext _context;
 
-    protected GenericRepository(MySQLContext context)
+    protected GenericRepository(MySqlContext context)
     {
         _context = context;
     }
@@ -42,7 +42,6 @@ public class GenericRepository<T, T_KEY> : IGenericRepository<T, T_KEY> where T 
     {
         _context.Update(entity);
         return await _context.SaveChangesAsync();
-
     }
 
     public virtual async Task<bool> DeleteAsync(T entity)
@@ -59,6 +58,7 @@ public class GenericRepository<T, T_KEY> : IGenericRepository<T, T_KEY> where T 
 
         throw new KeyNotFoundException("Entidade não encontrada");
     }
+
     public virtual T GetById(T_KEY id)
     {
         return _context.Set<T>().Find(id);
@@ -68,9 +68,9 @@ public class GenericRepository<T, T_KEY> : IGenericRepository<T, T_KEY> where T 
     {
         return await _context.Set<T>().FindAsync(id);
     }
+
     public virtual IQueryable<T> Query()
     {
         return _context.Set<T>().AsNoTracking();
     }
-
 }

@@ -7,8 +7,8 @@ namespace MarketPlace.Impl.Repository;
 
 public class UserRepository : GenericRepository<ApplicationUser, Guid>, IUserRepository
 {
-    private readonly MySQLContext _context;
-    public UserRepository(MySQLContext context) : base(context)
+    private readonly MySqlContext _context;
+    public UserRepository(MySqlContext context) : base(context)
     {
         _context = context;
     }
