@@ -168,9 +168,7 @@ public class AuthService : IAuthService
 
     public async Task<ApplicationUser> GetCurrentUser()
     {
-        // var userId = _userManager.GetUserId(_httpContextAccessor.HttpContext.User); // Get user id:
-
-        ApplicationUser user = await _userManager.GetUserAsync(_httpContextAccessor.HttpContext.User);
+        ApplicationUser? user = await _userManager.GetUserAsync(_httpContextAccessor.HttpContext.User);
 
         return user;
     }
