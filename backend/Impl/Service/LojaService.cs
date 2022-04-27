@@ -63,14 +63,14 @@ public class LojaService : ILojaService
         ApplicationUser currentUser = await _authService.GetCurrentUser();
         Loja loja = await _lojaRepository.GetByIdAsync(lojaDto.Id);
 
-        if ( null == loja )
+        if (null == loja)
             throw new ArgumentException("Loja nao encontrada.");
-        if ( currentUser.Id.Equals(loja.UserId) )
+        if (currentUser.Id.Equals(loja.UserId))
             throw new ArgumentException("Propietário da loja diferente de usuario logado.");
-            
+
         loja.Nome = lojaDto.Nome;
         loja.Descricao = lojaDto.Descricao;
-            
+
         return await _lojaRepository.UpdateAsync(loja);
     }
 }

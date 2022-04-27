@@ -26,7 +26,7 @@ public class SearchController : ControllerBase
             return BadRequest(ex.Message);
         }
     }
-    
+
     [HttpPost("search-loja")]
     public async Task<ActionResult> SearchLoja([FromBody] SearchDto searchDto)
     {
@@ -39,7 +39,7 @@ public class SearchController : ControllerBase
             return BadRequest(ex.Message);
         }
     }
-    
+
     [HttpPost("search-user")]
     public async Task<ActionResult> SearchUser([FromBody] SearchDto searchDto)
     {

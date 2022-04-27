@@ -26,5 +26,4 @@ public class ApplicationUser : IdentityUser<Guid>, IResultSearch
 
         return userDTO;
     }
-
 }

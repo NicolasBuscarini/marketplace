@@ -24,19 +24,16 @@ public class SearchService : ISearchService
         {
             > 20 => 20,
             < 1 => 1,
-            _ => searchDto.PageSize  // else
+            _ => searchDto.PageSize // else
         };
 
         // Primeira posição da pagina selecionada
         int firstPosition = (pageNumber - 1) * pageSize;
 
         // Fazendo a busca ordenada
-        List<T> result = await _searchRepository.SearchGenericByName<T>( searchDto.SearchString, firstPosition, pageSize );
-        
+        List<T> result =
+            await _searchRepository.SearchGenericByName<T>(searchDto.SearchString, firstPosition, pageSize);
+
         return result;
     }
-    
-    
-    
-    
 }

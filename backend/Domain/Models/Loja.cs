@@ -8,15 +8,13 @@ namespace MarketPlace.Domain.Models;
 public class Loja : IResultSearch
 {
     public Guid Id { get; set; }
-    public string Nome { get;  set; }
-    public string Descricao { get;  set; }
+    public string Nome { get; set; }
+    public string Descricao { get; set; }
     public decimal Cnpj { get; }
     public Guid UserId { get; private set; }
-    [ForeignKey("UserId")]
-    public ApplicationUser User { get; private set; }
+    [ForeignKey("UserId")] public ApplicationUser User { get; private set; }
 
-    [JsonIgnore]
-    public List<Produto>? Produtos { get; private set; }
+    [JsonIgnore] public List<Produto>? Produtos { get; private set; }
 
     public Loja()
     {

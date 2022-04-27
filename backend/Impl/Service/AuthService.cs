@@ -20,7 +20,9 @@ public class AuthService : IAuthService
     private readonly IHttpContextAccessor _httpContextAccessor;
     private readonly UserManager<ApplicationUser> _userManager;
 
-    public AuthService(IUserRepository userRepository, IConfiguration configuration, SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager, IHttpContextAccessor httpContextAccessor)
+    public AuthService(IUserRepository userRepository, IConfiguration configuration,
+        SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager,
+        IHttpContextAccessor httpContextAccessor)
     {
         _userRepository = userRepository;
 
@@ -87,7 +89,8 @@ public class AuthService : IAuthService
         if (UtilsHelper.IsCpf(signUpDTO.CpfCnpj))
         {
             enumUserType = EnumUserType.Cliente;
-        } else if (!UtilsHelper.IsCnpj(signUpDTO.CpfCnpj))
+        }
+        else if (!UtilsHelper.IsCnpj(signUpDTO.CpfCnpj))
         {
             enumUserType = EnumUserType.Vendedor;
         }
@@ -171,5 +174,4 @@ public class AuthService : IAuthService
 
         return user;
     }
-
 }

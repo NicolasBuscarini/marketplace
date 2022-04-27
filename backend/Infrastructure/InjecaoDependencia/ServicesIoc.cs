@@ -1,5 +1,4 @@
 ﻿using MarketPlace.Impl.Service;
-using MarketPlace.Interfaces.IRepository;
 using MarketPlace.Interfaces.IService;
 
 namespace MarketPlace.Infrastructure.InjecaoDependencia;
@@ -11,6 +10,6 @@ public static class ServicesIoc
         services.AddScoped<IAuthService, AuthService>();
         services.AddScoped<ILojaService, LojaService>();
         services.AddScoped<IProdutoService, ProdutoService>();
-        services.AddScoped<ISearchRepository, ISearchRepository>();
+        services.AddScoped<ISearchService, SearchService>();
     }
 }

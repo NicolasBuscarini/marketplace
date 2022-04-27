@@ -30,8 +30,8 @@ public class ProdutoService : IProdutoService
     public async Task<bool> DeleteProduto(Guid id)
     {
         ApplicationUser currentUser = await _authService.GetCurrentUser();
-        if ( EnumUserType.Admin == currentUser.EnumUserType ) throw new ArgumentException("Apenas administrador");
-            
+        if (EnumUserType.Admin == currentUser.EnumUserType) throw new ArgumentException("Apenas administrador");
+
         Produto produto = await _produtoRepository.GetByIdAsync(id);
         if (produto == null) throw new ArgumentException("Produto não encontrado");
 

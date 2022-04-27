@@ -7,8 +7,9 @@ namespace MarketPlace.Impl.Repository;
 
 public class LojaRepository : GenericRepository<Loja, Guid>, ILojaRepository
 {
-    private readonly MySQLContext _context;
-    public LojaRepository(MySQLContext context) : base(context)
+    private readonly MySqlContext _context;
+
+    public LojaRepository(MySqlContext context) : base(context)
     {
         _context = context;
     }
