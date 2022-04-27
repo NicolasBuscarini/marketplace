@@ -22,7 +22,7 @@ public class UserRepository : GenericRepository<ApplicationUser, Guid>, IUserRep
 
     public async Task<ApplicationUser?> GetByCpfCnpjAsync(string cpfCnpj)
     {
-        ApplicationUser? applicationUser = await _context.User.Where(p => p.CpfCnpj.Equals(cpfCnpj, StringComparison.Ordinal)).FirstOrDefaultAsync();
+        ApplicationUser? applicationUser = await _context.User.Where(p => p.CpfCnpj.Equals(cpfCnpj)).FirstOrDefaultAsync();
         return applicationUser;
     }
 }

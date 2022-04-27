@@ -19,8 +19,7 @@ public partial class SignUpDto
     [Required(ErrorMessage = "Endereco is required")]
     public string Endereco { get; set; }
 
-    [Required(ErrorMessage = "Endereco2 is required")]
-    public string Endereco2 { get; set; }
+    public string? Endereco2 { get; set; }
 
     [Required(ErrorMessage = "Cep is required")]
     public int Cep { get; set; }

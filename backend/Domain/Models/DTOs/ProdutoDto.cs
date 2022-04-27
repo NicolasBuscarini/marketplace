@@ -6,5 +6,5 @@ public class ProdutoDto
     public string Descricao { get; set; }
     public decimal Preco { get; set; }
     public int Estoque { get; set; }
-    public int LojaId { get; set; }
+    public Guid LojaId { get; set; }
 }

@@ -1,10 +1,14 @@
 ﻿using MarketPlace.Domain.Models;
 using MarketPlace.Domain.Models.DTOs;
 using MarketPlace.Interfaces.IService;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MarketPlace.Controllers;
 
+[Authorize]
+[Route("api/[controller]")]
+[ApiController]
 public class SearchController : ControllerBase
 {
     private readonly ISearchService _searchService;

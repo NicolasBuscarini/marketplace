@@ -12,10 +12,10 @@ public class Produto : IResultSearch
     public decimal Preco { get; private set; }
     public int Estoque { get; private set; }
 
-    public int LojaId { get; private set; }
+    public Guid LojaId { get; private set; }
     [ForeignKey("LojaId")] public Loja? Loja { get; private set; }
 
-    public Produto(string nome, string descricao, decimal preco, int estoque, int lojaId)
+    public Produto(string nome, string descricao, decimal preco, int estoque, Guid lojaId)
     {
         Nome = nome ?? throw new ArgumentNullException(nameof(nome));
         Descricao = descricao ?? throw new ArgumentNullException(nameof(descricao));
