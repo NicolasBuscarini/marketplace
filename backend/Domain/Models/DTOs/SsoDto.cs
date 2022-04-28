@@ -6,7 +6,7 @@
         public DayOfWeek Expiration { get; set; }
         public ApplicationUser User { get; set; }
 
-        public SsoDto(string access_token, DateTime expiration, ApplicationUser user)
+        public SsoDto(string access_token, ApplicationUser user)
         {
 
             this.Access_token = access_token;
