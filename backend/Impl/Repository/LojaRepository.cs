@@ -3,21 +3,21 @@ using MarketPlace.Infrastructure.Data.Context;
 using MarketPlace.Interfaces.IRepository;
 using Microsoft.EntityFrameworkCore;
 
-namespace MarketPlace.Impl.Repository
+namespace MarketPlace.Impl.Repository;
+
+public class LojaRepository : GenericRepository<Loja, Guid>, ILojaRepository
 {
-    public class LojaRepository : GenericRepository<Loja, Guid>, ILojaRepository
+    private readonly MySqlContext _context;
+
+    public LojaRepository(MySqlContext context) : base(context)
     {
-        private readonly MySQLContext _context;
-        public LojaRepository(MySQLContext context) : base(context)
-        {
-            _context = context;
-        }
+        _context = context;
+    }
 
-        public async Task<List<Loja>> ListLojas()
-        {
-            List<Loja> list = await _context.Loja.ToListAsync();
+    public async Task<List<Loja>> ListLojas()
+    {
+        List<Loja> list = await _context.Loja.Include(x => x.Produtos).ToListAsync();
 
-            return list;
-        }
+        return list;
     }
 }

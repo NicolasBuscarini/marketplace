@@ -1,9 +1,8 @@
 ﻿using MarketPlace.Domain.Models;
 
-namespace MarketPlace.Interfaces.IRepository
+namespace MarketPlace.Interfaces.IRepository;
+
+public interface ILojaRepository : IGenericRepository<Loja, Guid>
 {
-    public interface ILojaRepository : IGenericRepository<Loja, Guid>
-    {
-        Task<List<Loja>> ListLojas();
-    }
+    Task<List<Loja>> ListLojas();
 }

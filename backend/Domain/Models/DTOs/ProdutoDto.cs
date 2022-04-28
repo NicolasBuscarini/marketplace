@@ -1,11 +1,10 @@
-﻿namespace MarketPlace.Domain.Models.DTOs
+﻿namespace MarketPlace.Domain.Models.DTOs;
+
+public class ProdutoDto
 {
-    public class ProdutoDto
-    {
-        public string Nome { get; set; }
-        public string Descricao { get; set; }
-        public decimal Preco { get; set; }
-        public int Estoque { get; set; }
-        public int LojaId { get; set; }
-    }
+    public string Nome { get; set; } = null!;
+    public string Descricao { get; set; } = null!;
+    public decimal Preco { get; set; }
+    public int Estoque { get; set; }
+    public Guid LojaId { get; set; }
 }

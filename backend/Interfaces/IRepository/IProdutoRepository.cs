@@ -1,9 +1,8 @@
 ﻿using MarketPlace.Domain.Models;
 
-namespace MarketPlace.Interfaces.IRepository
+namespace MarketPlace.Interfaces.IRepository;
+
+public interface IProdutoRepository : IGenericRepository<Produto, Guid>
 {
-    public interface IProdutoRepository : IGenericRepository<Produto, Guid>
-    {
-        Task<List<Produto>> ListProdutos();
-    }
+    Task<List<Produto>> ListProdutos();
 }

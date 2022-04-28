@@ -1,78 +1,73 @@
 ﻿using MarketPlace.Infrastructure.Data.Context;
 using MarketPlace.Interfaces.IRepository;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
-namespace MarketPlace.Impl.Repository
+namespace MarketPlace.Impl.Repository;
+
+public class GenericRepository<T, TKey> : IGenericRepository<T, TKey> where T : class where TKey : struct
 {
-    public class GenericRepository<T, T_KEY> : IGenericRepository<T, T_KEY> where T : class where T_KEY : struct
+    private readonly MySqlContext _context;
+
+    protected GenericRepository(MySqlContext context)
     {
-        private readonly MySQLContext _context;
+        _context = context;
+    }
 
-        public GenericRepository(MySQLContext context)
-        {
-            _context = context;
-        }
+    public virtual async Task<T> CreateAsync(T entity)
+    {
+        EntityEntry<T> ret = await _context.Set<T>().AddAsync(entity);
 
-        public virtual async Task<T> CreateAsync(T entity)
-        {
-            var ret = await _context.Set<T>().AddAsync(entity);
+        await _context.SaveChangesAsync();
 
-            await _context.SaveChangesAsync();
+        ret.State = EntityState.Detached;
 
-            ret.State = EntityState.Detached;
+        return ret.Entity;
+    }
 
-            return ret.Entity;
-        }
+    public virtual async Task<int> UpdateAsync(T entity)
+    {
+        EntityEntry<T>? entry = _context.Entry(entity);
 
-        public virtual async Task<int> UpdateAsync(T entity)
-        {
-            var entry = _context.Entry(entity);
+        if (entry == null) throw new KeyNotFoundException("Entidade não encontrada");
+        
+        entry.State = EntityState.Modified;
 
-            if (entry != null)
-            {
-                entry.State = EntityState.Modified;
-
-                return await _context.SaveChangesAsync();
-            }
-
-            throw new KeyNotFoundException("Entidade não encontrada");
-        }
-
-        public virtual async Task<int> InsertOrUpdateAsync(T entity)
-        {
-            _context.Update(entity);
-            return await _context.SaveChangesAsync();
-
-        }
-
-        public virtual async Task<bool> DeleteAsync(T entity)
-        {
-            var entry = _context.Entry(entity);
-
-            if (entry != null)
-            {
-                entry.State = EntityState.Deleted;
-                await _context.SaveChangesAsync();
-
-                return true;
-            }
-
-            throw new KeyNotFoundException("Entidade não encontrada");
-        }
-        public virtual T GetById(T_KEY id)
-        {
-            return _context.Set<T>().Find(id);
-        }
-
-        public async virtual Task<T> GetByIdAsync(T_KEY id)
-        {
-            return await _context.Set<T>().FindAsync(id);
-        }
-        public virtual IQueryable<T> Query()
-        {
-            return _context.Set<T>().AsNoTracking();
-        }
+        return await _context.SaveChangesAsync();
 
     }
 
+    public virtual async Task<int> InsertOrUpdateAsync(T entity)
+    {
+        _context.Update(entity);
+        return await _context.SaveChangesAsync();
+    }
+
+    public virtual async Task<bool> DeleteAsync(T entity)
+    {
+        EntityEntry<T>? entry = _context.Entry(entity);
+
+        if (entry == null) throw new KeyNotFoundException("Entidade não encontrada");
+        
+        entry.State = EntityState.Deleted;
+        await _context.SaveChangesAsync();
+
+        return true;
+
+    }
+
+    public virtual T GetById(TKey id)
+    {
+        return _context.Set<T>().Find(id)!;
+    }
+
+    public virtual async Task<T> GetByIdAsync(TKey id)
+    {
+        return (await _context.Set<T>().FindAsync(id))!;
+    }
+
+    public virtual IQueryable<T> Query()
+    {
+        return _context.Set<T>().AsNoTracking();
+    }
 }

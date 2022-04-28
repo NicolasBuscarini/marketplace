@@ -1,93 +1,78 @@
-﻿namespace MarketPlace.Infrastructure.Helper
+﻿namespace MarketPlace.Infrastructure.Helper;
+
+public static class UtilsHelper
 {
-    public class UtilsHelper
+    public static bool IsCnpj(string cnpj)
     {
-        public UtilsHelper()
-        {
-        }
+        int[] multiplicador1 = { 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2 };
+        int[] multiplicador2 = { 6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2 };
+        cnpj = cnpj.Trim();
+        cnpj = cnpj.Replace(".", "").Replace("-", "").Replace("/", "");
+        if (cnpj.Length != 14)
+            return false;
+        string tempCnpj = cnpj[..12];
+        int soma = 0;
+        for (int i = 0; i < 12; i++)
+            soma += int.Parse(tempCnpj[i].ToString()) * multiplicador1[i];
+        int resto = (soma % 11);
+        if (resto < 2)
+            resto = 0;
+        else
+            resto = 11 - resto;
+        string digito = resto.ToString();
+        tempCnpj += digito;
+        soma = 0;
+        for (int i = 0; i < 13; i++)
+            soma += int.Parse(tempCnpj[i].ToString()) * multiplicador2[i];
+        resto = (soma % 11);
+        if (resto < 2)
+            resto = 0;
+        else
+            resto = 11 - resto;
+        digito += resto.ToString();
+        return cnpj.EndsWith(digito);
+    }
 
-        public static bool IsCnpj(string cnpj)
-        {
-            int[] multiplicador1 = new int[12] { 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2 };
-            int[] multiplicador2 = new int[13] { 6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2 };
-            int soma;
-            int resto;
-            string digito;
-            string tempCnpj;
-            cnpj = cnpj.Trim();
-            cnpj = cnpj.Replace(".", "").Replace("-", "").Replace("/", "");
-            if (cnpj.Length != 14)
-                return false;
-            tempCnpj = cnpj.Substring(0, 12);
-            soma = 0;
-            for (int i = 0; i < 12; i++)
-                soma += int.Parse(tempCnpj[i].ToString()) * multiplicador1[i];
-            resto = (soma % 11);
-            if (resto < 2)
-                resto = 0;
-            else
-                resto = 11 - resto;
-            digito = resto.ToString();
-            tempCnpj = tempCnpj + digito;
-            soma = 0;
-            for (int i = 0; i < 13; i++)
-                soma += int.Parse(tempCnpj[i].ToString()) * multiplicador2[i];
-            resto = (soma % 11);
-            if (resto < 2)
-                resto = 0;
-            else
-                resto = 11 - resto;
-            digito = digito + resto.ToString();
-            return cnpj.EndsWith(digito);
-        }
+    public static bool IsCpf(string cpf)
+    {
+        int[] multiplicador1 = { 10, 9, 8, 7, 6, 5, 4, 3, 2 };
+        int[] multiplicador2 = { 11, 10, 9, 8, 7, 6, 5, 4, 3, 2 };
 
-        public static bool IsCpf(string cpf)
-        {
-            int[] multiplicador1 = new int[9] { 10, 9, 8, 7, 6, 5, 4, 3, 2 };
-            int[] multiplicador2 = new int[10] { 11, 10, 9, 8, 7, 6, 5, 4, 3, 2 };
+        cpf = cpf.Trim();
+        cpf = cpf.Replace(".", "").Replace("-", "");
 
-            string tempCpf;
-            string digito;
+        if (cpf.Length != 11)
+            return false;
 
-            int soma;
-            int resto;
+        string tempCpf = cpf[..9];
+        int soma = 0;
 
-            cpf = cpf.Trim();
-            cpf = cpf.Replace(".", "").Replace("-", "");
+        for (int i = 0; i < 9; i++)
+            soma += int.Parse(tempCpf[i].ToString()) * multiplicador1[i];
 
-            if (cpf.Length != 11)
-                return false;
+        int resto = soma % 11;
 
-            tempCpf = cpf.Substring(0, 9);
-            soma = 0;
+        if (resto < 2)
+            resto = 0;
+        else
+            resto = 11 - resto;
 
-            for (int i = 0; i < 9; i++)
-                soma += int.Parse(tempCpf[i].ToString()) * multiplicador1[i];
+        string digito = resto.ToString();
+        tempCpf += digito;
+        soma = 0;
 
-            resto = soma % 11;
+        for (int i = 0; i < 10; i++)
+            soma += int.Parse(tempCpf[i].ToString()) * multiplicador2[i];
 
-            if (resto < 2)
-                resto = 0;
-            else
-                resto = 11 - resto;
+        resto = soma % 11;
 
-            digito = resto.ToString();
-            tempCpf = tempCpf + digito;
-            soma = 0;
+        if (resto < 2)
+            resto = 0;
+        else
+            resto = 11 - resto;
 
-            for (int i = 0; i < 10; i++)
-                soma += int.Parse(tempCpf[i].ToString()) * multiplicador2[i];
+        digito += resto.ToString();
 
-            resto = soma % 11;
-
-            if (resto < 2)
-                resto = 0;
-            else
-                resto = 11 - resto;
-
-            digito = digito + resto.ToString();
-
-            return cpf.EndsWith(digito);
-        }
+        return cpf.EndsWith(digito);
     }
 }

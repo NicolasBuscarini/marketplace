@@ -1,37 +1,29 @@
 ﻿using MarketPlace.Domain.Models.DTOs;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
+using MarketPlace.Interfaces.IGeneric;
 
-namespace MarketPlace.Domain.Models
+namespace MarketPlace.Domain.Models;
+
+public class Loja : IResultSearch
 {
-    public class Loja
+    public Guid Id { get; set; }
+    public string Nome { get; set; } = null!;
+    public string Descricao { get; set; } = null!;
+    public decimal Cnpj { get; }
+    public Guid UserId { get; }
+    [ForeignKey("UserId")] public ApplicationUser User { get; private set; } = null!;
+
+    [JsonIgnore] public List<Produto>? Produtos { get; }
+
+    public Loja()
     {
-        public int Id { get; set; }
-        public string Nome { get; private set; }
-        public string Descricao { get; private set; }
-        public Guid UserId { get; set; }
-        [ForeignKey("UserId")]
-        public ApplicationUser User { get; set; }
+    }
 
-        [JsonIgnore]
-        public List<Produto>? Produtos { get; set; }
-
-        public Loja()
-        {
-        }
-
-        public Loja(string nome, string descricao, decimal cnpj, List<Produto>? produtos)
-        {
-            Nome = nome;
-            Descricao = descricao;
-            Produtos = produtos;
-        }
-
-        public Loja(LojaDto lojaDto, Guid userId)
-        {
-            Nome = lojaDto.Nome;
-            Descricao = lojaDto.Descricao;
-            UserId = userId;
-        }
+    public Loja(LojaDto lojaDto, Guid userId)
+    {
+        Nome = lojaDto.Nome;
+        Descricao = lojaDto.Descricao;
+        UserId = userId;
     }
 }

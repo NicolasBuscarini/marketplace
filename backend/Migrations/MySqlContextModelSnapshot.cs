@@ -3,18 +3,16 @@ using System;
 using MarketPlace.Infrastructure.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
 namespace MarketPlace.Migrations
 {
-    [DbContext(typeof(MySQLContext))]
-    [Migration("20220413195411_FKLojaId")]
-    partial class FKLojaId
+    [DbContext(typeof(MySqlContext))]
+    partial class MySqlContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -57,15 +55,15 @@ namespace MarketPlace.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
-                    b.Property<string>("CPF")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
                     b.Property<int>("Cep")
                         .HasColumnType("int");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("CpfCnpj")
+                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<DateTime>("DataNascimento")
@@ -83,8 +81,10 @@ namespace MarketPlace.Migrations
                         .HasColumnType("longtext");
 
                     b.Property<string>("Endereco2")
-                        .IsRequired()
                         .HasColumnType("longtext");
+
+                    b.Property<int>("EnumUserType")
+                        .HasColumnType("int");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("tinyint(1)");
@@ -92,7 +92,7 @@ namespace MarketPlace.Migrations
                     b.Property<DateTimeOffset?>("LockoutEnd")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<string>("NomeCompleto")
+                    b.Property<string>("Nome")
                         .IsRequired()
                         .HasColumnType("longtext");
 
@@ -137,12 +137,9 @@ namespace MarketPlace.Migrations
 
             modelBuilder.Entity("MarketPlace.Domain.Models.Loja", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("Cnpj")
-                        .HasColumnType("decimal(65,30)");
+                        .HasColumnType("char(36)");
 
                     b.Property<string>("Descricao")
                         .IsRequired()
@@ -152,16 +149,21 @@ namespace MarketPlace.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("char(36)");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Loja");
                 });
 
             modelBuilder.Entity("MarketPlace.Domain.Models.Produto", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("char(36)");
 
                     b.Property<string>("Descricao")
                         .IsRequired()
@@ -170,8 +172,8 @@ namespace MarketPlace.Migrations
                     b.Property<int>("Estoque")
                         .HasColumnType("int");
 
-                    b.Property<int>("LojaId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("LojaId")
+                        .HasColumnType("char(36)");
 
                     b.Property<string>("Nome")
                         .IsRequired()
@@ -284,6 +286,17 @@ namespace MarketPlace.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
+                });
+
+            modelBuilder.Entity("MarketPlace.Domain.Models.Loja", b =>
+                {
+                    b.HasOne("MarketPlace.Domain.Models.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("MarketPlace.Domain.Models.Produto", b =>

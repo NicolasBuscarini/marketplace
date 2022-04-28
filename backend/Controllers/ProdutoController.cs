@@ -4,89 +4,73 @@ using MarketPlace.Interfaces.IService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace MarketPlace.Controllers
+namespace MarketPlace.Controllers;
+
+[Authorize]
+[Route("api/[controller]")]
+[ApiController]
+public class ProdutoController : ControllerBase
 {
-    [Authorize]
-    [Route("api/[controller]")]
-    [ApiController]
-    public class ProdutoController : ControllerBase
+    private readonly IProdutoService _produtoService;
+
+    public ProdutoController(IProdutoService produtoService)
     {
-        private readonly IProdutoService _produtoService;
+        _produtoService = produtoService;
+    }
 
-        public ProdutoController(IProdutoService produtoService)
+    [HttpPost("create-produto")]
+    public async Task<ActionResult> CreateProduto([FromBody] ProdutoDto produtoDto)
+    {
+        try
         {
-            _produtoService = produtoService;
+            return Ok(await _produtoService.CreateProduto(produtoDto));
         }
-
-        [AllowAnonymous]
-        [HttpPost("create-produto")]
-        public async Task<ActionResult> CreateProduto([FromBody] ProdutoDto produtoDto)
+        catch (Exception ex)
         {
-            try
-            {
-                return Ok(await _produtoService.CreateProduto(produtoDto));
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            return BadRequest(ex.Message);
         }
+    }
 
-        [HttpGet("get-all-produtos")]
-        public async Task<ActionResult> GetAllProdutos()
+    [HttpGet("get-all-produtos")]
+    public async Task<ActionResult> GetAllProdutos()
+    {
+        try
         {
-            try
-            {
-                List<Produto> listProduto = await _produtoService.GetAllProdutos();
+            List<Produto> listProduto = await _produtoService.GetAllProdutos();
 
-                return Ok(listProduto);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            return Ok(listProduto);
         }
-
-        [HttpGet("get-produto")]
-        public async Task<ActionResult> GetProdutoByProdutoId([FromQuery] int produtoId)
+        catch (Exception ex)
         {
-            try
-            {
-                Produto produto = await _produtoService.GetProdutoById(produtoId);
-
-                return Ok(produto);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            return BadRequest(ex.Message);
         }
+    }
 
-        [HttpPost("desativar-produto")]
-        public async Task<ActionResult> DesativarProduto([FromBody] int produtoId)
+    [HttpGet("get-produto")]
+    public async Task<ActionResult> GetProdutoByProdutoId([FromQuery] Guid produtoId)
+    {
+        try
         {
-            try
-            {
-                return Ok(await _produtoService.DesativarProduto(produtoId));
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
+            Produto produto = await _produtoService.GetProdutoById(produtoId);
 
-        [HttpPost("update-produto")]
-        public async Task<ActionResult> UpdateProduto([FromBody] ProdutoDto produtoDto)
+            return Ok(produto);
+        }
+        catch (Exception ex)
         {
-            try
-            {
-                return Ok(await _produtoService.UpdateProduto(produtoDto));
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            return BadRequest(ex.Message);
         }
+    }
 
+    [HttpPost("update-produto")]
+    public async Task<ActionResult> UpdateProduto([FromBody] ProdutoDto produtoDto)
+    {
+        try
+        {
+            return Ok(await _produtoService.UpdateProduto(produtoDto));
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
     }
 }

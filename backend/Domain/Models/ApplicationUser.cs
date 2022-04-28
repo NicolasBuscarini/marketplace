@@ -1,30 +1,29 @@
 ﻿using MarketPlace.Domain.Models.DTOs;
 using MarketPlace.Domain.Models.Enums;
+using MarketPlace.Interfaces.IGeneric;
 using Microsoft.AspNetCore.Identity;
 
-namespace MarketPlace.Domain.Models
+namespace MarketPlace.Domain.Models;
+
+public class ApplicationUser : IdentityUser<Guid>, IResultSearch
 {
-    public class ApplicationUser : IdentityUser<Guid>
+    public string CpfCnpj { get; set; } = null!;
+    public string Nome { get; set; } = null!;
+    public DateTime DataNascimento { get; set; }
+    public string Endereco { get; set; } = null!;
+    public string? Endereco2 { get; set; }
+    public int Cep { get; set; }
+    public EnumUserType EnumUserType { get; set; }
+
+    public UserDto UserDto()
     {
-        public string CpfCnpj { get; set; }
-        public string NomeCompleto { get; set; }
-        public DateTime DataNascimento { get; set; }
-        public string Endereco { get; set; }
-        public string Endereco2 { get; set; }
-        public int Cep { get; set; }
-        public EnumUserType EnumUserType { get; set; }
-
-        public UserDto UserDTO()
+        UserDto userDto = new()
         {
-            UserDto userDTO = new UserDto
-            {
-                Id = Id,
-                UserName = UserName,
-                Email = Email
-            };
+            Id = Id,
+            UserName = UserName,
+            Email = Email
+        };
 
-            return userDTO;
-        }
-
+        return userDto;
     }
 }
