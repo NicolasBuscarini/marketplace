@@ -2,15 +2,14 @@
 {
     public class SsoDto
     {
-        public string AccessToken { get; set; }
-        
+        public string Access_token { get; set; }
         public DayOfWeek Expiration { get; set; }
-        
         public ApplicationUser User { get; set; }
 
-        public SsoDto(string accessToken, ApplicationUser user)
+        public SsoDto(string access_token, DateTime expiration, ApplicationUser user)
         {
-            this.AccessToken = accessToken;
+
+            this.Access_token = access_token;
             this.Expiration = DateTime.Now.DayOfWeek;
             this.User = user;
         }
