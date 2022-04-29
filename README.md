@@ -6,7 +6,7 @@ Um projeto para estudos com o propósito de aplicar e desenvolver habilidades de
 
 
 ## Links
-[MarketPlace FrontEnd](https://nicolasbuscarini.github.io/marketplace/)
+[MarketPlace FrontEnd](https://nicolasbuscarini.github.io/marketplace/app)
 
 
 ### Tecnologias utilizadas
