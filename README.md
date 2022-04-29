@@ -1,10 +1,12 @@
 # Marketplace
 
-## Links
-[MarketPlace FrontEnd](https://nicolasbuscarini.github.io/marketplace/)
 
 ### Sobre
 Um projeto para estudos com o propósito de aplicar e desenvolver habilidades de programação tanto em Backend e Frontend. 
+
+
+## Links
+[MarketPlace FrontEnd](https://nicolasbuscarini.github.io/marketplace/)
 
 
 ### Tecnologias utilizadas
