@@ -8,7 +8,6 @@
 
         public SsoDto(string access_token, ApplicationUser user)
         {
-
             this.Access_token = access_token;
             this.Expiration = DateTime.Now.DayOfWeek;
             this.User = user;

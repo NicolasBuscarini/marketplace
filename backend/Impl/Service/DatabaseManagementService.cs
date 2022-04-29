@@ -1,3 +1,4 @@
+using MarketPlace.Infrastructure.Data.Context;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -11,7 +12,7 @@ public static class DatabaseManagementService
         {
             using (var serviceScope = app.ApplicationServices.CreateScope())
             {
-                serviceScope.ServiceProvider.GetService<ApplicationDbContext>().Database.Migrate();
+                serviceScope.ServiceProvider.GetService<MySqlContext>().Database.Migrate();
             }
         }
     }
