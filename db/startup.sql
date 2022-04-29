@@ -1,4 +1,8 @@
-CREATE USER 'nicols'@'%' IDENTIFIED BY 'bob@123';
-GRANT ALL PRIVILEGES ON *.* TO 'nicols'@'%' WITH GRANT OPTION;
+USE mysql;
+CREATE USER 'nicolas'@'%' IDENTIFIED BY 'bob@123';
+GRANT ALL ON *.* TO 'nicolas'@'%';
+FLUSH PRIVILEGES;
 
 CREATE DATABASE marketplace;
+
+use marketplace;

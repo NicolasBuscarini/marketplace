@@ -5,8 +5,6 @@ COPY . .
 
 #CMD ["/bin/sh", "-ec", "while :; do echo '.'; sleep 6 ; done"]
 
-RUN dotnet tool install --global dotnet-ef
-RUN dotnet ef database update
 
 RUN dotnet build
 

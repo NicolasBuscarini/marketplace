@@ -1,4 +1,5 @@
 using MarketPlace.Domain.Models;
+using MarketPlace.Impl.Service;
 using MarketPlace.Infrastructure.Data.Context;
 using MarketPlace.Infrastructure.InjecaoDependencia;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -67,6 +68,7 @@ RepositoryIoc.Config(builder.Services);
 builder.Services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo { Title = "MarketPlace", Version = "v1" }); });
 
 WebApplication app = builder.Build();
+DatabaseManagementService.MigrationInitialisation(app);
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
