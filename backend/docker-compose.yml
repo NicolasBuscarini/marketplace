@@ -1,5 +1,5 @@
 
-version: '2.4'
+version: '3'
 services:
   dotnet-sdk:
     container_name: marketplaceApi
@@ -10,6 +10,21 @@ services:
     ports:
       - 5000:5000
     restart: unless-stopped
+
+  marketplacebase:
+    container_name: marketplacedb
+    build: 
+      context: .
+      dockerfile: Dockerfile-db
+    command: --bind-address=0.0.0.0 --max_allowed_packet=32505856 --lower_case_table_names=1 --default-authentication-plugin=mysql_native_password 
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: marketplace
+      MYSQL_ROOT_PASSWORD: "bob@123"
+    ports:
+      - 3307:3306
+    volumes:
+      - "./.mysql-data/_data:/var/lib/mysql"
     
 networks:
   default:
