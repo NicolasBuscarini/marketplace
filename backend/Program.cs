@@ -22,7 +22,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy(name: myAllowSpecificOrigins,
         policyBuilder =>
         {
-            policyBuilder.WithOrigins("http://localhost:4200/");
+            policyBuilder.WithOrigins("https://nicolasbuscarini.github.io");
         });
 });
 
@@ -60,7 +60,7 @@ builder.Services.AddAuthentication(options =>
         };
     });
 
-// Inje��o de dependencias
+// Injecao de dependencias
 ServicesIoc.Config(builder.Services);
 RepositoryIoc.Config(builder.Services);
 

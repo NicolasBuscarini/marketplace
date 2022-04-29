@@ -1,0 +1,13 @@
+
+version: '2.4'
+services:
+  dotnet-sdk:
+    container_name: marketplaceApi
+    build: .
+    volumes:
+      - ./Properties:/usr/share/app/Properties
+      #- ./src:/usr/share/app/src
+    ports:
+      - 5000:5000
+    restart: unless-stopped
+    
