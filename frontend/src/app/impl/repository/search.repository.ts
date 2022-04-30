@@ -23,7 +23,7 @@ export class SearchRepository {
 
     SearchProduto (searchDto: SearchDto): Observable<Produto[]> {
         return this.httpClient
-          .post<Produto[]>(`${this.apiUrl}/api/Player/list-players`, searchDto , this.httpOptions)
+          .post<Produto[]>(`${this.apiUrl}/api/Search/search-produto`, searchDto , this.httpOptions)
           .pipe(
             map((res: any) => {
               return res.map((item: Produto) => {
