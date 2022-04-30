@@ -33,8 +33,8 @@ export class SearchRepository {
                   item.descricao,
                   item.estoque,
                   item.preco,
-                  item.lojaId,
-                  item.loja
+                  item.imagemUrl,
+                  item.lojaId
                 );
               });
             })

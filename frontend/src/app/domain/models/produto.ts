@@ -6,8 +6,9 @@ export class Produto {
   descricao: string;
   preco: number;
   estoque: number;
+  imagemUrl: string;
   lojaId: string;
-  loja: Loja;
+  loja?: Loja;
 
   constructor(
     id: string,
@@ -15,15 +16,15 @@ export class Produto {
     descricao: string,
     preco: number,
     estoque: number,
+    imagemUrl: string,
     lojaId: string,
-    loja: Loja
   ) {
     this.id = id;
     this.nome = nome;
     this.descricao = descricao;
     this.preco = preco;
     this.estoque = estoque;
+    this.imagemUrl = imagemUrl;
     this.lojaId = lojaId;
-    this.loja = loja;
   }
 }
