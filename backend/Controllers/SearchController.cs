@@ -18,6 +18,7 @@ public class SearchController : ControllerBase
         _searchService = searchService;
     }
 
+    [AllowAnonymous]
     [HttpPost("search-produto")]
     public async Task<ActionResult> SearchProduto([FromBody] SearchDto searchDto)
     {
@@ -31,6 +32,7 @@ public class SearchController : ControllerBase
         }
     }
 
+    [AllowAnonymous]
     [HttpPost("search-loja")]
     public async Task<ActionResult> SearchLoja([FromBody] SearchDto searchDto)
     {
@@ -44,6 +46,7 @@ public class SearchController : ControllerBase
         }
     }
 
+    [AllowAnonymous]
     [HttpPost("search-user")]
     public async Task<ActionResult> SearchUser([FromBody] SearchDto searchDto)
     {
