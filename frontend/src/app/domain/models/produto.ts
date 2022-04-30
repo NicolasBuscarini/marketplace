@@ -1,3 +1,5 @@
+import { Loja } from "./loja";
+
 export class Produto {
   id: string;
   nome: string;

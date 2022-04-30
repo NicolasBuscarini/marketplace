@@ -1,5 +1,5 @@
 export class SearchDto {
-
+  
   pageNumber: number;
   searchString: string;
   pageSize: number;
