@@ -1,7 +1,26 @@
-<div class="container-fluid">
+<div class="container">
+  <!-- Result: uma lista de produtos gerado pela pesquisa. 
+    ( ao iniciar a pagina faz uma pesquisa vazia) -->
+  <div class="card" *ngFor="let produto of result">
     <div class="row">
-        <div class="col-md">
-            
+      <div class="col-md-3">
+        <img
+          src="{{ produto.imagemUrl }}"
+          title="mouse"
+          alt="mouse gamer"
+          class="img-fluid img-thumbnail"
+        />
+      </div>
+      <div class="col-md-9">
+        <div class="card-body">
+          <h5 class="card-title">{{ produto.nome }}</h5>
+          <p class="card-text">
+            {{ produto.descricao }}
+          </p>
+          <a href="#" class="card-link">Favoritar</a>
+          <a href="#" class="card-link">Adicionar ao Carrinho</a>
         </div>
+      </div>
     </div>
+  </div>
 </div>
