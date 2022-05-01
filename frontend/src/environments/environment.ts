@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'https://144.22.138.210:5000'
+  apiUrl: 'https://marketplaceapi.sytes.net:5000'
 };
 
 /*

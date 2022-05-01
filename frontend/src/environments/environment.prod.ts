@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://marketplaceapi:5000'
+  apiUrl: 'https://marketplaceapi.sytes.net:5000'
 };
