@@ -1,8 +1,23 @@
-# Marketplace
+<h1 align="center">
+   Marketplace
+</h1>
+
+<p align="center">
+  <a href="#sobre">Sobre</a> .
+  <a href="#links">Links</a> .
+  <a href="#tecnologias-utilizadas">Tecnologias</a> .
+ 
+</p>
+
+<br>
+
+<h4 align="center">
+  :construction: Projeto MarketPlace :rocket: Em construção... :construction_worker::warning:
+</h4>
 
 ### Sobre
 
-Um projeto para estudos com o propósito de aplicar e desenvolver habilidades de programação tanto em Backend e Frontend.
+Um projeto para estudos com o propósito de aplicar e desenvolver habilidades de programação tanto em Backend quanto Frontend. Implementação de um site web responsivo que consome uma API para realizar chamadas e se conectar com banco de dados.
 
 ## Links
 
