@@ -16,6 +16,9 @@ MIT
 @angular/router
 MIT
 
+ngx-bootstrap/collapse
+MIT
+
 ngx-bootstrap/component-loader
 MIT
 

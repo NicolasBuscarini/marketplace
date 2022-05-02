@@ -4,8 +4,8 @@ export class Produto {
   id: string;
   nome: string;
   descricao: string;
-  preco: number;
   estoque: number;
+  preco: number;
   imagemUrl: string;
   lojaId: string;
   loja?: Loja;
@@ -14,8 +14,8 @@ export class Produto {
     id: string,
     nome: string,
     descricao: string,
-    preco: number,
     estoque: number,
+    preco: number,
     imagemUrl: string,
     lojaId: string,
   ) {
