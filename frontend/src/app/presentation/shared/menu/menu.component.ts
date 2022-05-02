@@ -18,7 +18,7 @@ export class MenuComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  isCollapsed = true;
+  isCollapsed = false;
   message = 'expanded';
  
   collapsed(): void {
