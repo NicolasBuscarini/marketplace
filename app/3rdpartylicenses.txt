@@ -1,13 +1,31 @@
+@angular/animations
+MIT
+
 @angular/common
 MIT
 
 @angular/core
 MIT
 
+@angular/forms
+MIT
+
 @angular/platform-browser
 MIT
 
 @angular/router
+MIT
+
+ngx-bootstrap/component-loader
+MIT
+
+ngx-bootstrap/positioning
+MIT
+
+ngx-bootstrap/typeahead
+MIT
+
+ngx-bootstrap/utils
 MIT
 
 rxjs
