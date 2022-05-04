@@ -12,6 +12,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { FooterComponent } from './presentation/shared/footer/footer.component';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
+import { NgxNavbarModule } from 'ngx-bootstrap-navbar';
+
 
 @NgModule({
   declarations: [
@@ -26,6 +28,7 @@ import { CollapseModule } from 'ngx-bootstrap/collapse';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    NgxNavbarModule,
     TypeaheadModule.forRoot(),
     BrowserAnimationsModule,
     CollapseModule.forRoot()
