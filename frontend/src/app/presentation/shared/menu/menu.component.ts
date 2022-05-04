@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MenuComponent implements OnInit {
 
-  selected?: string;
+  selected?: string = "";
   states: string[] = [
     'Furadeira',
     'Mouse',
