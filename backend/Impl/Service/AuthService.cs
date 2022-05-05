@@ -89,7 +89,7 @@ public class AuthService : IAuthService
         {
             enumUserType = EnumUserType.Cliente;
         }
-        else if (!UtilsHelper.IsCnpj(signUpDto.CpfCnpj))
+        else if (UtilsHelper.IsCnpj(signUpDto.CpfCnpj))
         {
             enumUserType = EnumUserType.Vendedor;
         }

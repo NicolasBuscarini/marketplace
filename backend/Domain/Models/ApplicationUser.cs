@@ -12,7 +12,7 @@ public class ApplicationUser : IdentityUser<Guid>, IResultSearch
     public DateTime DataNascimento { get; set; }
     public string Endereco { get; set; } = null!;
     public string? Endereco2 { get; set; }
-    public int Cep { get; set; }
+    public string Cep { get; set; }
     public EnumUserType EnumUserType { get; set; }
 
     public UserDto UserDto()
