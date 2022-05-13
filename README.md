@@ -37,4 +37,4 @@ Bootstrap    | 5
 
 ### Comandos
 
-Build frontend: ` npm run build-gh `
+Build frontend: ` ng deploy --base-href=/<marketplace>/ `
