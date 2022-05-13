@@ -13,6 +13,7 @@ import { FormsModule } from '@angular/forms';
 import { FooterComponent } from './presentation/shared/footer/footer.component';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { NgxNavbarModule } from 'ngx-bootstrap-navbar';
+import { LoginComponent } from './presentation/pages/auth/login/login.component';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { NgxNavbarModule } from 'ngx-bootstrap-navbar';
     AppComponent,
     MenuComponent,
     HomeComponent,
-    FooterComponent
+    FooterComponent,
+    LoginComponent
   ],
   imports: [
     CommonModule,
