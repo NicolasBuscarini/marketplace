@@ -34,3 +34,7 @@ Docker       | 20.10.12
 Typescript   | 4.6.
 MySql        | 8
 Bootstrap    | 5
+
+### Comandos
+
+Build frontend: ` npm run build-gh `
