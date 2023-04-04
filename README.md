@@ -22,7 +22,7 @@ Um projeto para estudos com o propósito de aplicar e desenvolver habilidades de
 ## Links
 
  - <a href="https://nicolasbuscarini.github.io/marketplace/app" target="_blank">MarketPlace FrontEnd</a> 
- - <a href="https://marketplaceapi.sytes.net:5000/swagger/index.html" target="_blank">MarketPlace Api</a>
+ - <a href="https://144.22.138.210:5000/swagger/index.html" target="_blank">MarketPlace Api</a>
 
 ### Tecnologias utilizadas
 
